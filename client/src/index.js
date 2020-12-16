@@ -4,8 +4,8 @@ import reportWebVitals from './reportWebVitals';
  
  
 import Wizard from './components/wizard';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './less/app.less';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import './scss/app.module.scss';
 
 ReactDOM.render(
   <React.StrictMode>

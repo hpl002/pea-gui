@@ -4,8 +4,8 @@ import StepWizard from 'react-step-wizard';
 import Nav from './nav';
 import Plugs from './Plugs';
 
-import styles from './wizard.less';
-import transitions from './transitions.less';
+import styles from '../scss/wizard.module.scss';
+import transitions from '../scss/transitions.module.scss';
 /* eslint react/prop-types: 0 */
 
 /**

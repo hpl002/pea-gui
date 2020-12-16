@@ -1,6 +1,6 @@
 import React from 'react';
 /* eslint react/prop-types: 0 */
-import styles from './nav.less';
+import styles from '../scss/nav.module.scss';
 
 const Nav = (props) => {
     const dots = [];

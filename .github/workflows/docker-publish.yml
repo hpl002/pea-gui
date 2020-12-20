@@ -29,7 +29,7 @@ jobs:
 
       - name: Push image
         run: |
-          IMAGE_ID=docker.pkg.github.com/pea/$IMAGE_NAME
+          IMAGE_ID=docker.pkg.github.com/hpl002/pea/$IMAGE_NAME
           VERSION=$MAJOR.$MINOR.$PATCH
            
            

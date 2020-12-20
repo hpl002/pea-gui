@@ -31,12 +31,11 @@ jobs:
       - name: Push image
         run: |
           IMAGE_ID=docker.pkg.github.com/pea/$IMAGE_NAME
-          SEMVER=$MAJOR.$MINOR.$PATCH
+          $VERSION=$MAJOR.$MINOR.$PATCH
 
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-           
-          $VERSION=SEMVER
+                      
 
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION

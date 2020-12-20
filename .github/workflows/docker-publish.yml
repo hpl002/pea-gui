@@ -11,7 +11,6 @@ env:
   IMAGE_NAME: gui
   MAJOR: 0
   MINOR: 0
-  PATCH: github.run_id
 
 jobs:
   
@@ -31,7 +30,7 @@ jobs:
       - name: Push image
         run: |
           IMAGE_ID=docker.pkg.github.com/pea/$IMAGE_NAME
-          $VERSION=$MAJOR.$MINOR.$PATCH
+          $VERSION=$MAJOR.$MINOR.$github.run_id
 
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')

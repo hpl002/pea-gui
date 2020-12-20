@@ -13,7 +13,6 @@ env:
   MINOR: 0
 
 jobs:
-  
   push:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -30,12 +29,13 @@ jobs:
       - name: Push image
         run: |
           IMAGE_ID=docker.pkg.github.com/pea/$IMAGE_NAME
-          $VERSION=$MAJOR.$MINOR.$github.run_id
+
+          $VERSION=$MAJOR.$MINOR.${{ github.run_id }}
+                    
 
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
                       
-
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 

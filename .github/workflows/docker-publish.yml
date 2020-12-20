@@ -30,15 +30,13 @@ jobs:
       - name: Push image
         run: |
           IMAGE_ID=docker.pkg.github.com/pea/$IMAGE_NAME
-
-          $VERSION=$MAJOR.$MINOR.$PATCH
-
-          echo github.run_id=${{ github.run_number }}
-          echo VERSION=$VERSION
+          VERSION=$MAJOR.$MINOR.$PATCH
+           
            
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
                       
+          echo VERSION=$VERSION
           echo IMAGE_ID=$IMAGE_ID
 
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION

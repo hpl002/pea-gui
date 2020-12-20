@@ -11,6 +11,7 @@ env:
   IMAGE_NAME: gui
   MAJOR: 0
   MINOR: 0
+  PATCH: ${{ github.run_number }}
 
 jobs:
   push:
@@ -30,14 +31,15 @@ jobs:
         run: |
           IMAGE_ID=docker.pkg.github.com/pea/$IMAGE_NAME
 
-          $VERSION=$MAJOR.$MINOR.${{ github.run_id }}
-                    
+          $VERSION=$MAJOR.$MINOR.$PATCH
 
+          echo github.run_id=${{ github.run_number }}
+          echo VERSION=$VERSION
+           
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
                       
           echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
 
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION

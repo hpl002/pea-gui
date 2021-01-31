@@ -1,16 +1,16 @@
-import React, { Fragment, useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import React, { useState } from "react";
 import StepWizard from "react-step-wizard";
-import Nav from "./nav"; 
+import Nav from "./nav";
 import transitions from "../scss/transitions.module.scss";
-import First from "./pages/First"
-import Modeler from "./pages/Modeler"
-import Miner from "./pages/Miner"
- 
+import First from "./pages/First";
+import Modeler from "./pages/Modeler";
+import Miner from "./pages/Miner";
 
 /**
  * A basic demonstration of how to use the step wizard
  */
-const Wizard = () => {
+const Wizard = (props) => {
   const [state, updateState] = useState({
     form: {},
     transitions: {
@@ -44,7 +44,6 @@ const Wizard = () => {
       ...state,
       SW,
     });
-   
 
   return (
     <StepWizard
@@ -54,9 +53,13 @@ const Wizard = () => {
       nav={<Nav />}
       instance={setInstance}
     >
-      <First hashKey={"FirstStep"} update={updateForm} styles={{height:"96vh"}}/>
-      <Miner styles={{height:"96vh"}}/>
-      <Modeler/>
+      <First
+        hashKey={"FirstStep"}
+        update={updateForm}
+        styles={{ height: "96vh" }}
+      />
+      <Miner styles={{ height: "96vh" }} />
+      <Modeler handleModelChange={props.handleModelChange} />
     </StepWizard>
   );
 };

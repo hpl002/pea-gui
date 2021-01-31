@@ -3,9 +3,6 @@ import React from 'react';
 import styles from '../scss/nav.module.scss';
 
 const Nav = (props) => {
-
-    console.log(props)
-
     const dots = [];
     for (let i = 1; i <= props.totalSteps; i += 1) {
         const isActive = props.currentStep === i;

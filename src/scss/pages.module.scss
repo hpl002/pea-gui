@@ -1,0 +1,18 @@
+.content {
+  height: calc(100vh - 30px);
+  width: inherit;
+  display: inline-flex;
+}
+
+.centerVertical {
+  align-items: center;
+}
+
+.centerHorizontal {
+  justify-content: center;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}

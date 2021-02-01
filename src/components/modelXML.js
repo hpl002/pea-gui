@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, {useContext} from "react";
-import {ModelerContext} from "../app";
+import React from "react";
+ 
 
-export default function Component()  {
-  const modelMeta = useContext(ModelerContext )
+export default function Component(props) {   
+  const { state: { model, setModel } } = props;
   return (
-      <div>
-        <p>{modelMeta}</p>
-      </div>
+    <div>
+        The answer is {model}.                  
+        <button onClick={()=>{setModel("some new value kajnsdkaknsd")}}> BUTTON{model}</button>
+    </div>
   );
 }

@@ -10,7 +10,7 @@ import Miner from "./pages/Miner";
 /**
  * A basic demonstration of how to use the step wizard
  */
-const Wizard = (props) => {
+const Wizard = (props) => {   
   const [state, updateState] = useState({
     form: {},
     transitions: {
@@ -59,7 +59,7 @@ const Wizard = (props) => {
         styles={{ height: "96vh" }}
       />
       <Miner styles={{ height: "96vh" }} />
-      <Modeler handleModelChange={props.handleModelChange} />
+      <Modeler state={props.state} />
     </StepWizard>
   );
 };

@@ -2,26 +2,24 @@ import Wizard from "./components/wizard";
 import XmlViewer from "./components/modelXML";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./scss/app.module.scss";
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useState } from "react"; 
 
 export const ModelerContext = React.createContext();
 
 export default function App() {
   const [model, setModel] = useState("some value");
+  //create a hook that logs every time the state is updated
+  //should therefore log whenver we update state from eithr child
+
+  function handleChange(newValue) {
+    setModel(newValue);
+  }
+
   return (
-    <Router>
-      <div>
-        <Route exact path="/">
           <div style={{ height: "100vh" }}>
-            <Wizard style={{ height: "100vh" }} state={{model,setModel}}/>
+            <Wizard style={{ height: "100vh" }} state={{ model, handleChange }} />
           </div>
-        </Route>
-        <Route exact path="/modelXML">
-          <XmlViewer state={{model,setModel}}/>
-        </Route>
-      </div>
-    </Router>
+     
   );
 }
 

@@ -12,9 +12,11 @@
     "node-sass": "4.14",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-step-wizard": "^5.3.5",
+    "react-syntax-highlighter": "^15.4.3",
+    "reactjs-popup": "^2.0.4",
+    "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4",
     "xml2js": "^0.4.23"
   },

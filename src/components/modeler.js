@@ -5,13 +5,28 @@ import Modeler from "bpmn-js/lib/Modeler";
 import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 import axios from "axios";
+import Popup from "reactjs-popup";
+import Styled from 'styled-components';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
+const Component = (props) => {
+  return (
+    <SyntaxHighlighter language={props.language} style={docco}>
+      {props.code}
+    </SyntaxHighlighter>
+  );
+};
 
 const condition = true;
 
-function App(props) {   
-  const { state: { model, setModel } } = props;
+function App(props) {
+  const {
+    state: { model, handleChange },
+  } = props;
   const [diagram, diagramSet] = useState("");
-  const [localModel, localModelSet] = useState("");     
+  const [localModel, localModelSet] = useState("");
+  const [displayModeler, setDisplayModeler] = useState(true);
   const container = document.getElementById("container");
 
   useEffect(() => {
@@ -39,9 +54,9 @@ function App(props) {
   
   */
 
- if (
-   diagram.length > 0 &&
-   // eslint-disable-next-line react/no-find-dom-node
+    if (
+      diagram.length > 0 &&
+      // eslint-disable-next-line react/no-find-dom-node
       ReactDOM.findDOMNode(container).childElementCount === 0
     ) {
       const bpmnModeler = new Modeler({
@@ -69,31 +84,53 @@ function App(props) {
     }
   }, [diagram, localModel]);
 
-  const handleClick = () => {     
-    localModel.saveXML({ format: true }, function (err, xml) {       
-      window.open("/modelXML");
-    });
+  const handleClick = () => {
+    localModel.saveXML({ format: true }, function (err, xml) {
+      handleChange(xml)       
+      console.log(xml)
+  });
   };
 
+  const ModelerOrXML = (p) => {
+    /* 
+      here we need to inject the syntax highlighter component as a direct child of teh #container and a direct sibling of the bpmn modeler
+      then change the display properties accorgint to the state set by the button
+    */
+
+
+    if(p.value){
+      return <div id="container" style={{ border: "1px solid #000000", height: "100%", width: "100%", margin: "auto"}} />       
+    }
+    else{
+      return <Component code={model} language={"XML"}/>
+    }
+  }  
+      
+
+    
   return (
-    <div className="App" style={{ height: "calc(-100px + 100vh)" }}>       
-    <button onClick={()=>{setModel("some 11111")}}> BUTTON{model}</button>
-    <button onClick={()=>{setModel("some 222222")}}> BUTTON{model}</button>
-      <div
-        id="container"
-        style={{
-          border: "1px solid #000000",
-          height: "100%",
-          width: "100%",
-          margin: "auto",
-        }}
-      />
-      <div style={{ height: "50px", padding: "10px 0px 10px 0px" }}>
-        <button className="btn btn-info btn-block" onClick={handleClick}>
-          Open as XML in new window
-        </button>
-      </div>
-    </div>
+    <Wrapper>     
+      <div id="container" style={{ border: "1px solid #000000", height: "100%", width: "100%", margin: "auto", marginBottom:"10px"}} />       
+    <Styledbutton className="btn btn-info btn-block" onClick={() => {
+      handleClick();
+    }}> Open Modal </Styledbutton>
+    </Wrapper>
   );
 }
 export default App;
+
+
+ 
+const Wrapper = Styled.div`     
+  display: flex;
+  height: calc(-40px + 100vh);
+  flex-direction:column;
+`;
+
+const Styledbutton = Styled.button`     
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-top:auto;
+  margin-bottom: 10px;
+`;

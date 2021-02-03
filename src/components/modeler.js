@@ -10,12 +10,17 @@ import Styled from 'styled-components';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
+
 const Component = (props) => {
-  return (
-    <SyntaxHighlighter language={props.language} style={docco}>
-      {props.code}
-    </SyntaxHighlighter>
-  );
+  if(props.display){
+    return (
+      <SyntaxHighlighter language={props.language} style={docco} lineProps={{style: {wordBreak: 'break-all', whiteSpace: 'pre-wrap'}}}
+      wrapLines={true} >
+        {props.code?props.code:""}
+      </SyntaxHighlighter>
+    );     
+  }   
+  return ""
 };
 
 const condition = true;
@@ -26,7 +31,7 @@ function App(props) {
   } = props;
   const [diagram, diagramSet] = useState("");
   const [localModel, localModelSet] = useState("");
-  const [displayModeler, setDisplayModeler] = useState(true);
+  const [displayModeler, setDisplayModeler] = useState(true);   
   const container = document.getElementById("container");
 
   useEffect(() => {
@@ -86,45 +91,47 @@ function App(props) {
 
   const handleClick = () => {
     localModel.saveXML({ format: true }, function (err, xml) {
-      handleChange(xml)       
-      console.log(xml)
+      handleChange(xml)    
+      setDisplayModeler(!displayModeler);       
   });
   };
 
-  const ModelerOrXML = (p) => {
-    /* 
-      here we need to inject the syntax highlighter component as a direct child of teh #container and a direct sibling of the bpmn modeler
-      then change the display properties accorgint to the state set by the button
-    */
-
-
-    if(p.value){
-      return <div id="container" style={{ border: "1px solid #000000", height: "100%", width: "100%", margin: "auto"}} />       
-    }
-    else{
-      return <Component code={model} language={"XML"}/>
-    }
-  }  
-      
+ 
 
     
   return (
     <Wrapper>     
-      <div id="container" style={{ border: "1px solid #000000", height: "100%", width: "100%", margin: "auto", marginBottom:"10px"}} />       
-    <Styledbutton className="btn btn-info btn-block" onClick={() => {
-      handleClick();
-    }}> Open Modal </Styledbutton>
-    </Wrapper>
+      <ContentWrapper>
+        <BPMNJS id="container" style={{display: displayModeler ? 'initial' : 'none' }}/>                
+        <Component display={!displayModeler} code={model}/>
+      </ContentWrapper>
+    <Styledbutton className="btn btn-info btn-block" onClick={() => { handleClick();}}>Open Modal</Styledbutton></Wrapper>
   );
 }
 export default App;
 
 
+
+const BPMNJS = Styled.div`     
+  border: 1px solid #000000;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  marginBottom:10px;
+`;
  
 const Wrapper = Styled.div`     
   display: flex;
   height: calc(-40px + 100vh);
   flex-direction:column;
+`;
+
+
+const ContentWrapper = Styled.div`     
+  display: flex;   
+  flex-direction:column;
+  height: calc(-100px + 100vh);
+  margin-bottom: 10px;
 `;
 
 const Styledbutton = Styled.button`     

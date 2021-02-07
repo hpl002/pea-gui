@@ -2,25 +2,33 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Modeler from "bpmn-js/lib/Modeler";
+import propertiesPanelModule from "bpmn-js-properties-panel";
+import propertiesProviderModule from "bpmn-js-properties-panel/lib/provider/bpmn";
 import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 import axios from "axios";
-import Popup from "reactjs-popup";
-import Styled from 'styled-components';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-
+import Styled from "styled-components";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+var modelerConfig = require("../configs/modeler.json");
 
 const Component = (props) => {
-  if(props.display){
+  if (props.display) {
     return (
-      <SyntaxHighlighter language={props.language} style={docco} lineProps={{style: {wordBreak: 'break-all', whiteSpace: 'pre-wrap'}}}
-      wrapLines={true} >
-        {props.code?props.code:""}
+      <SyntaxHighlighter
+        language={props.language}
+        style={docco}
+        customStyle={{ height: "inherit" }}
+        lineProps={{
+          style: { wordBreak: "break-all", whiteSpace: "pre-wrap" },
+        }}
+        wrapLines={true}
+      >
+        {props.code ? props.code : ""}
       </SyntaxHighlighter>
-    );     
-  }   
-  return ""
+    );
+  }
+  return "";
 };
 
 const condition = true;
@@ -31,8 +39,9 @@ function App(props) {
   } = props;
   const [diagram, diagramSet] = useState("");
   const [localModel, localModelSet] = useState("");
-  const [displayModeler, setDisplayModeler] = useState(true);   
-  const container = document.getElementById("container");
+  const [displayModeler, setDisplayModeler] = useState(true);
+  const canvas = document.getElementById("canvas");
+  const properties = document.getElementById("properties");
 
   useEffect(() => {
     if (condition) {
@@ -62,12 +71,16 @@ function App(props) {
     if (
       diagram.length > 0 &&
       // eslint-disable-next-line react/no-find-dom-node
-      ReactDOM.findDOMNode(container).childElementCount === 0
+      ReactDOM.findDOMNode(canvas).childElementCount === 0
     ) {
       const bpmnModeler = new Modeler({
-        container,
+        additionalModules: [propertiesPanelModule, propertiesProviderModule],
+        container: "#canvas",         
         keyboard: {
           bindTo: document,
+        },
+        moddleExtensions: {
+          qa: modelerConfig,
         },
       });
       bpmnModeler
@@ -76,56 +89,55 @@ function App(props) {
           if (warnings.length) {
             console.log("Warnings", warnings);
           }
-          const canvas = bpmnModeler.get("modeling");
-          canvas.setColor("CalmCustomerTask", {
-            stroke: "green",
-            fill: "yellow",
-          });
         })
         .catch((err) => {
           console.log("error", err);
         });
-        localModelSet(bpmnModeler);
+      localModelSet(bpmnModeler);
     }
   }, [diagram, localModel]);
 
   const handleClick = () => {
     localModel.saveXML({ format: true }, function (err, xml) {
-      handleChange(xml)    
-      setDisplayModeler(!displayModeler);       
-  });
+      handleChange(xml);
+      setDisplayModeler(!displayModeler);
+    });
   };
 
- 
-
-    
   return (
-    <Wrapper>     
+    <Wrapper>
       <ContentWrapper>
-        <BPMNJS id="container" style={{display: displayModeler ? 'initial' : 'none' }}/>                
-        <Component display={!displayModeler} code={model}/>
+      <ModelerWraper id="modeler" >         
+        <div id="canvas"style={{ display: displayModeler ? "initial" : "none" }}/>                 
+        <Component display={!displayModeler} code={model} style={{height:"inherit"}}/>
+      </ModelerWraper>
       </ContentWrapper>
-    <Styledbutton className="btn btn-info btn-block" onClick={() => { handleClick();}}>Open Modal</Styledbutton></Wrapper>
+      <Styledbutton
+        className="btn btn-info btn-block"
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        View model as XML
+      </Styledbutton>
+    </Wrapper>
   );
 }
 export default App;
 
-
-
-const BPMNJS = Styled.div`     
+const ModelerWraper = Styled.div`     
   border: 1px solid #000000;
   height: 100%;
   width: 100%;
   margin: auto;
   marginBottom:10px;
 `;
- 
+
 const Wrapper = Styled.div`     
   display: flex;
   height: calc(-40px + 100vh);
   flex-direction:column;
 `;
-
 
 const ContentWrapper = Styled.div`     
   display: flex;   

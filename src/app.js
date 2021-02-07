@@ -1,5 +1,4 @@
 import Wizard from "./components/wizard";
-import XmlViewer from "./components/modelXML";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./scss/app.module.scss";
 import React, { useState } from "react"; 

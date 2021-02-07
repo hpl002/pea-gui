@@ -3283,6 +3283,13 @@ camelize@^1.0.0:
   resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
   integrity sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
 
+camunda-bpmn-moddle@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/camunda-bpmn-moddle/-/camunda-bpmn-moddle-4.5.0.tgz#f26e235cd3728ac66fcf0442afa895a35d5471cb"
+  integrity sha512-g3d2ZaCac52WIXP3kwmYrBEkhm0nnXcWYNj5STDkmiWpDTKUzTj4ZIt38IRpci1Uj3a/rZACvXLnQj8xKFyp/w==
+  dependencies:
+    min-dash "^3.0.0"
+
 caniuse-api@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/caniuse-api/-/caniuse-api-3.0.0.tgz#5e4d90e2274961d46291997df599e3ed008ee4c0"

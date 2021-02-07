@@ -10,6 +10,7 @@
     "bootstrap": "^4.5.3",
     "bpmn-js": "^8.2.0",
     "bpmn-js-properties-panel": "^0.40.0",
+    "camunda-bpmn-moddle": "^4.5.0",
     "node-sass": "4.14",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

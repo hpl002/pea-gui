@@ -112,8 +112,8 @@ function App(props) {
     <Wrapper>
       <ContentWrapper>
         <ModelerWraper id="modeler">
-          <Canvas id="canvas" style={{ display: displayModeler ? "flex" : "none" }} />
-          <Properties id="properties"/>
+          <Canvas id="canvas" style={{ display: displayModeler ? "initial" : "none" }} />
+          <Properties id="properties" style={{ display: displayModeler ? "initial" : "none" }} />
           <Component display={!displayModeler} code={model} style={{ height: "inherit" }} />
         </ModelerWraper>
       </ContentWrapper>

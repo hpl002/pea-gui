@@ -11,7 +11,7 @@ const Stats = ({
     step,
     title="no title"
   }) => (
-    <div style={{"margin": "2%"}}>     
+    <div style={{"marginTop": "2%", "marginBottom": "2%"}}>     
   {step === "next" ? (
         <button className="btn btn-info btn-block" onClick={nextStep}>
           {title}

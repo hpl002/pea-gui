@@ -6,7 +6,7 @@ import React, { useState } from "react";
 export const ModelerContext = React.createContext();
 
 export default function App() {
-  const [model, setModel] = useState("some value");
+  const [model, setModel] = useState(false);
   //create a hook that logs every time the state is updated
   //should therefore log whenver we update state from eithr child
 

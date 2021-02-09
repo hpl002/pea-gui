@@ -34,9 +34,8 @@ const Wizard = (props) => {
   };
 
   // Do something on step change
-  const onStepChange = (stats) => {
-    // console.log(stats);
-    //can for example save data to db
+  const onStepChange = () => {
+    console.log("stepchange")
   };
 
   const setInstance = (SW) =>
@@ -47,7 +46,6 @@ const Wizard = (props) => {
 
   return (
     <StepWizard
-      onStepChange={onStepChange}
       isHashEnabled
       transitions={state.transitions} // comment out for default transitions
       nav={<Nav />}
@@ -60,7 +58,7 @@ const Wizard = (props) => {
         state={props.state}
       />
       <Miner styles={{ height: "96vh" }} />
-      <Modeler state={props.state} />
+      <Modeler state={props.state} currentStep={props.currentStep}/>
     </StepWizard>
   );
 };

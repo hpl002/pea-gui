@@ -57,6 +57,7 @@ const Wizard = (props) => {
         hashKey={"FirstStep"}
         update={updateForm}
         styles={{ height: "96vh" }}
+        state={props.state}
       />
       <Miner styles={{ height: "96vh" }} />
       <Modeler state={props.state} />

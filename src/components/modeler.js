@@ -36,7 +36,8 @@ const Component = (props) => {
 
 const newModeler = ({ model, canvas }) => {
   // eslint-disable-next-line react/no-find-dom-node
-  if (ReactDOM.findDOMNode(canvas).childElementCount === 0) {
+  console.log("trying to draw model. Does element exist in dom?", ReactDOM.findDOMNode(canvas))
+  // eslint-disable-next-line react/no-find-dom-node
     const bpmnModeler = new Modeler({
       container: "#canvas",
       propertiesPanel: {
@@ -64,7 +65,6 @@ const newModeler = ({ model, canvas }) => {
     }
 
     return bpmnModeler;
-  }
 };
 
 function App(props) {
@@ -78,17 +78,13 @@ function App(props) {
   const [displayModeler, setDisplayModeler] = useState(true);
   const canvas = document.getElementById("canvas");
 
-  useEffect(() => {     
-    if (canvas) {
+  useEffect(() => {          
+    console.log("drawing model again")
       if (model) {
         const bpmnModeler = newModeler({ model, canvas });
         localModelSet(bpmnModeler);
-      } else {
-        const bpmnModeler = newModeler({ canvas });
-        localModelSet(bpmnModeler);
-      }
-    }
-  }, [localModel, model, props.currentStep]);
+      } 
+  }, [model]);
 
   const handleClick = () => {
     if (localModel) {
@@ -99,14 +95,16 @@ function App(props) {
     }
   };
 
-  return (
+  return (     
     <Wrapper>
       <ContentWrapper>
         <ModelerWraper id="modeler">
           <Canvas
             id="canvas"
             style={{ display: displayModeler ? "initial" : "none" }}
-          />
+          >
+          CANVAS HERE YO
+          </Canvas>
           <Properties
             id="properties"
             style={{

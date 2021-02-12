@@ -7,7 +7,7 @@ const port = 3050;
 // read xml file
 // parse xml to json
 // send json file
-app.get("/init", (req, res) => {
+app.get("/api/init", (req, res) => {
   let data = "";
   try {
     data = fs.readFileSync("../static/init.bpmn", "utf8");

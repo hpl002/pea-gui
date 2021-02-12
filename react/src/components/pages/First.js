@@ -12,6 +12,28 @@ const First = (props) => {
   const {
     state: { model, handleChange },
   } = props;
+
+
+  useEffect(async () => {
+    var config = {
+      method: 'get',
+      url: '/api/init',
+      headers: { }
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+     
+     
+  },[]);
+
+
+
   const getModel = async () => {
     if (!url) alert("please specify a value");
     let response;

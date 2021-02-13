@@ -14,7 +14,8 @@
 
 # misc
 .DS_Store
- 
+
+todo.md
 
 /react/npm-debug.log*
 /react/yarn-debug.log*

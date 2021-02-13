@@ -143,7 +143,7 @@ function App(props) {
           handleClick();
         }}
       >
-        View model as XML
+      {displayModeler ? 'View XML' : 'View modeler'}
       </Styledbutton>
     </Wrapper>
   );

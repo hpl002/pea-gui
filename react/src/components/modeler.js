@@ -11,8 +11,10 @@ import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 import "bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css";
 
 import propertiesPanelModule from "bpmn-js-properties-panel";
-import propertiesProviderModule from "bpmn-js-properties-panel/lib/provider/camunda";
-import camundaModdleDescriptor from "camunda-bpmn-moddle/resources/camunda";
+// import provider from "bpmn-js-properties-panel/lib/provider/camunda";
+// import descriptor from "camunda-bpmn-moddle/resources/camunda";
+import provider from '../modeler-configs/provider/magic';
+import descriptor from '../modeler-configs/descriptors/magic';
 
 const Component = (props) => {
   if (props.display) {
@@ -42,9 +44,9 @@ const newModeler = () => {
       propertiesPanel: {
         parent: "#properties",
       },
-      additionalModules: [propertiesPanelModule, propertiesProviderModule],
+      additionalModules: [propertiesPanelModule, provider],
       moddleExtensions: {
-        camunda: camundaModdleDescriptor,
+        camunda: descriptor,
       },
     });
     return bpmnModeler     

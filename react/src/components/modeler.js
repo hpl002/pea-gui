@@ -103,7 +103,6 @@ function App(props) {
             id="canvas"
             style={{ display: displayModeler ? "initial" : "none" }}
           >
-          CANVAS HERE YO
           </Canvas>
           <Properties
             id="properties"

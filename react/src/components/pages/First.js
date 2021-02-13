@@ -19,11 +19,10 @@ const First = (props) => {
       method: 'get',
       url: '/api/init',
       headers: { }
-    };
-    
+    };    
     axios(config)
-    .then(function (response) {
-      console.log(JSON.stringify(response.data));
+    .then(function (response) {       
+      handleChange(response.data)
     })
     .catch(function (error) {
       console.log(error);

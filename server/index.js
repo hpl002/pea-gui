@@ -10,7 +10,7 @@ const port = 3050;
 app.get("/api/init", (req, res) => {
   let data = "";
   try {
-    data = fs.readFileSync("../static/init.bpmn", "utf8");
+    data = fs.readFileSync("../static/init.xml", "utf8");
     res.status(200).send(data);
   } catch (error) {
       console.error(error)

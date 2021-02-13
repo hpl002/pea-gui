@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import Styled from "styled-components";
 
 import SyntaxHighlighter from "react-syntax-highlighter";
@@ -35,6 +34,7 @@ const Component = (props) => {
 };
 
 var vbpmnModeler=false;
+var prevStep = undefined;
 
 const newModeler = () => {
       const bpmnModeler = new Modeler({
@@ -65,18 +65,26 @@ const updateModeler = (bpmnModeler, model) => {
 return bpmnModeler;
 }
 
-function App(props) {
-  console.log(props.currentStep)
-   
-      
+ 
+
+function App(props) {   
   const {
     state: { model, handleChange },
   } = props;
   const [displayModeler, setDisplayModeler] = useState(true);
 
+  const saveModelToState = async () => {
+    try {
+      const result = await vbpmnModeler.saveXML({ format: true });
+      const { xml } = result;
+      handleChange(xml);                
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
   useEffect(() => {          
-
-
     if(model && !vbpmnModeler){
       vbpmnModeler = newModeler();
       updateModeler(vbpmnModeler, model)         
@@ -86,8 +94,18 @@ function App(props) {
     }     
   }, [model]);
 
-  const handleClick = () => { 
-    updateModeler(vbpmnModeler, model)         
+  useEffect(async () => {          
+    if(!prevStep) prevStep = props.currentStep
+    if(prevStep === 3){
+      await saveModelToState();
+      console.log("current step:", props.currentStep)
+      console.log("previous step:", prevStep)
+    }
+    
+     prevStep = props.currentStep 
+ }, [props.currentStep]);
+
+  const handleClick = () => {      
     if (vbpmnModeler && model) {
       vbpmnModeler.saveXML({ format: true }, function (err, xml) {
         handleChange(xml);

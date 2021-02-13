@@ -34,11 +34,10 @@ const Component = (props) => {
   return "";
 };
 
-const newModeler = ({ model, canvas }) => {
-  // eslint-disable-next-line react/no-find-dom-node
-  console.log("trying to draw model. Does element exist in dom?", ReactDOM.findDOMNode(canvas))
-  // eslint-disable-next-line react/no-find-dom-node
-    const bpmnModeler = new Modeler({
+var vbpmnModeler=false;
+
+const newModeler = () => {
+      const bpmnModeler = new Modeler({
       container: "#canvas",
       propertiesPanel: {
         parent: "#properties",
@@ -48,24 +47,23 @@ const newModeler = ({ model, canvas }) => {
         camunda: camundaModdleDescriptor,
       },
     });
-
-    if (model) {
-      bpmnModeler
-        .importXML(model)
-        .then(({ warnings }) => {
-          if (warnings.length) {
-            console.log("Warnings", warnings);
-          }
-        })
-        .catch((err) => {
-          console.log("error", err);
-        });
-    } else {
-      bpmnModeler.createDiagram();
-    }
-
-    return bpmnModeler;
+    return bpmnModeler     
 };
+
+
+const updateModeler = (bpmnModeler, model) => {
+  bpmnModeler
+  .importXML(model)
+  .then(({ warnings }) => {
+    if (warnings.length) {
+      console.log("Warnings", warnings);
+    }
+  })
+  .catch((err) => {
+    console.log("error", err);
+  });
+return bpmnModeler;
+}
 
 function App(props) {
   console.log(props.currentStep)
@@ -74,21 +72,24 @@ function App(props) {
   const {
     state: { model, handleChange },
   } = props;
-  const [localModel, localModelSet] = useState("");
   const [displayModeler, setDisplayModeler] = useState(true);
-  const canvas = document.getElementById("canvas");
 
   useEffect(() => {          
-    console.log("drawing model again")
-      if (model) {
-        const bpmnModeler = newModeler({ model, canvas });
-        localModelSet(bpmnModeler);
-      } 
+
+
+    if(model && !vbpmnModeler){
+      vbpmnModeler = newModeler();
+      updateModeler(vbpmnModeler, model)         
+    }
+    else if(model && vbpmnModeler){      
+      updateModeler(vbpmnModeler, model)         
+    }     
   }, [model]);
 
-  const handleClick = () => {
-    if (localModel) {
-      localModel.saveXML({ format: true }, function (err, xml) {
+  const handleClick = () => { 
+    updateModeler(vbpmnModeler, model)         
+    if (vbpmnModeler && model) {
+      vbpmnModeler.saveXML({ format: true }, function (err, xml) {
         handleChange(xml);
         setDisplayModeler(!displayModeler);
       });

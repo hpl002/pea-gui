@@ -41,6 +41,7 @@ const First = (props) => {
       handleChange(response.data);
       console.info(response.data)
     } catch (error) {
+      alert(error)
       console.error(error);
     }
   };

@@ -11,10 +11,10 @@ import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 import "bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css";
 
 import propertiesPanelModule from "bpmn-js-properties-panel";
-// import provider from "bpmn-js-properties-panel/lib/provider/camunda";
-// import descriptor from "camunda-bpmn-moddle/resources/camunda";
 import provider from '../modeler-configs/provider/magic';
-import descriptor from '../modeler-configs/descriptors/magic';
+
+import descriptor from '../modeler-configs/descriptors/bpsim.json';
+//import descriptor from '../modeler-configs/descriptors/magic';
 
 const Component = (props) => {
   if (props.display) {
@@ -35,88 +35,93 @@ const Component = (props) => {
   return "";
 };
 
-var vbpmnModeler=false;
+var vbpmnModeler = false;
 var prevStep = undefined;
 
 const newModeler = () => {
-      const bpmnModeler = new Modeler({
+  try {
+    const bpmnModeler = new Modeler({
       container: "#canvas",
       propertiesPanel: {
         parent: "#properties",
       },
       additionalModules: [propertiesPanelModule, provider],
       moddleExtensions: {
-        camunda: descriptor,
-      },
+        qa: descriptor
+      }
     });
-    return bpmnModeler     
+    return bpmnModeler
+  } catch (error) {
+    console.error("could not create a new modeder", error)
+  }
+
 };
 
 
 const updateModeler = (bpmnModeler, model) => {
   bpmnModeler
-  .importXML(model)
-  .then(({ warnings }) => {
-    if (warnings.length) {
-      console.log("Warnings", warnings);
-    }
-  })
-  .catch((err) => {
-    console.log("error", err);
-  });
-return bpmnModeler;
+    .importXML(model)
+    .then(({ warnings }) => {
+      if (warnings.length) {
+        console.log("Warnings", warnings);
+      }
+    })
+    .catch((err) => {
+      console.log("error", err);
+    });
+  return bpmnModeler;
 }
 
- 
 
-function App(props) {   
+
+function App(props) {
   const {
     state: { model, handleChange },
   } = props;
   const [displayModeler, setDisplayModeler] = useState(true);
 
-  const saveModelToState = async () => {
-    try {
-      const result = await vbpmnModeler.saveXML({ format: true });
-      const { xml } = result;
-      handleChange(xml);                
-    } catch (err) {
-      console.log(err);
+  const saveModelToState = async (callback) => {
+    if (vbpmnModeler) {
+      try {
+        const result = await vbpmnModeler.saveXML({ format: true });
+        const { xml } = result;
+        handleChange(xml);
+        callback();
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 
 
-  useEffect(() => {          
-    if(model && !vbpmnModeler){
+  useEffect(() => {
+    if (model && !vbpmnModeler) {
       vbpmnModeler = newModeler();
-      updateModeler(vbpmnModeler, model)         
+      updateModeler(vbpmnModeler, model)
     }
-    else if(model && vbpmnModeler){      
-      updateModeler(vbpmnModeler, model)         
-    }     
+    else if (model && vbpmnModeler) {
+      updateModeler(vbpmnModeler, model)
+    }
   }, [model]);
 
-  useEffect(async () => {          
-    if(!prevStep) prevStep = props.currentStep
-    if(prevStep === 3){
+  useEffect(async () => {
+    if (!prevStep) prevStep = props.currentStep
+    if (prevStep === 3) {
       await saveModelToState();
       console.log("current step:", props.currentStep)
       console.log("previous step:", prevStep)
     }
-    
-     prevStep = props.currentStep 
- }, [props.currentStep]);
 
-  const handleClick = () => {      
+    prevStep = props.currentStep
+  }, [props.currentStep]);
+
+  const handleClick = async () => {
     if (vbpmnModeler && model) {
-      vbpmnModeler.saveXML({ format: true }, function (err, xml) {
-        handleChange(xml);
-        setDisplayModeler(!displayModeler);
-      });
+      await saveModelToState(() => { setDisplayModeler(!displayModeler) });
     }
   };
 
-  return (     
+  return (
     <Wrapper>
       <ContentWrapper>
         <ModelerWraper id="modeler">
@@ -145,7 +150,7 @@ function App(props) {
           handleClick();
         }}
       >
-      {displayModeler ? 'View XML' : 'View modeler'}
+        {displayModeler ? 'View XML' : 'View modeler'}
       </Styledbutton>
     </Wrapper>
   );

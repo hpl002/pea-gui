@@ -14,7 +14,6 @@ import propertiesPanelModule from "bpmn-js-properties-panel";
 import provider from '../modeler-configs/provider/magic';
 
 import descriptor from '../modeler-configs/descriptors/bpsim.json';
-//import descriptor from '../modeler-configs/descriptors/magic';
 
 const Component = (props) => {
   if (props.display) {

@@ -11,7 +11,7 @@ import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 import "bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css";
 
 import propertiesPanelModule from "bpmn-js-properties-panel";
-import provider from '../modeler-configs/provider/magic';
+import provider from "../modeler-configs/provider"
 
 import descriptor from '../modeler-configs/descriptors/bpsim.json';
 

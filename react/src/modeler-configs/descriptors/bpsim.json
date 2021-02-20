@@ -23,11 +23,149 @@
       "name": "Scenario",
       "properties": [
         {
-          "name": "text",
-          "isBody": true,
-          "type": "String"
+          "name": "id",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "author",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "vendor",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "version",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "inherits",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "result",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "created",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "modified",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "ScenarioParameters",
+          "isMany": true,
+          "type": "ScenarioParameters"
+        },
+        {
+          "name": "ElementParameters",
+          "isMany": true,
+          "type": "ElementParameters"
+        },
+        {
+          "name": "Calendar",
+          "isMany": true,
+          "type": "Calendar"
+        },
+        {
+          "name": "VendorExtension",
+          "isMany": true,
+          "type": "VendorExtension"
         }
       ]
+    },
+    {
+      "name": "ScenarioParameters",
+      "properties": [
+        {
+          "name": "replication",
+          "type": "Integer",
+          "isAttr": true
+        },
+        {
+          "name": "seed",
+          "isAttr": true,
+          "type": "Integer"
+        },
+        {
+          "name": "baseTimeUnit",
+          "type": "String",
+          "default": "min",
+          "isAttr": true
+        },
+        {
+          "name": "baseCurrencyUnit",
+          "type": "String",
+          "default": "USD",
+          "isAttr": true
+        },
+        {
+          "name": "baseResultFrequency",
+          "type": "String",
+          "isAttr": true
+        },
+        {
+          "name": "baseResultFrequencyCumul",
+          "type": "Boolean",
+          "isAttr": true,
+          "default": false
+        },
+        {
+          "name": "traceOutput",
+          "type": "Boolean",
+          "isAttr": true,
+          "default": false
+        },
+        {
+          "name": "traceFormat",
+          "type": "String",
+          "isAttr": true,
+          "default": "XES"
+        }
+      ]
+    },
+    {
+      "name": "ElementParameters",
+      "properties": [
+        {
+          "name": "id",
+          "type": "string",
+          "isAttr": true
+        },
+        {
+          "name": "elementRef",
+          "type": "string",
+          "isAttr": true
+        }
+      ]
+    },
+    {
+      "name": "Calendar",
+      "properties": []
+    },
+    {
+      "name": "VendorExtension",
+      "properties": []
     }
   ],
   "enumerations": [],

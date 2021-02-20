@@ -13,7 +13,8 @@ import "bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css";
 import propertiesPanelModule from "bpmn-js-properties-panel";
 import provider from "../modeler-configs/provider"
 
-import descriptor from '../modeler-configs/descriptors/bpsim.json';
+import qa from '../modeler-configs/descriptors/qa.json';
+import bpsim from '../modeler-configs/descriptors/bpsim.json';
 
 const Component = (props) => {
   if (props.display) {
@@ -46,7 +47,7 @@ const newModeler = () => {
       },
       additionalModules: [propertiesPanelModule, provider],
       moddleExtensions: {
-        qa: descriptor
+        qa: qa
       }
     });
     return bpmnModeler

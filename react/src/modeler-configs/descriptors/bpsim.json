@@ -1,45 +1,27 @@
 {
-  "name": "QualityAssurance",
-  "uri": "http://some-company/schema/bpmn/qa",
-  "prefix": "qa",
+  "name": "bpsim-moddle",
+  "prefix": "bpsim",
+  "uri": "https://www.bpsim.org/schemas/2.0/",
   "xml": {
     "tagAlias": "lowerCase"
   },
   "types": [
     {
-      "name": "AnalysisDetails",
+      "name": "BPSimData",
       "superClass": [
         "Element"
       ],
       "properties": [
         {
-          "name": "lastChecked",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
-          "name": "nextCheck",
-          "isAttr": true,
-          "type": "String"
-        },
-        {
-          "name": "comments",
+          "name": "Scenario",
           "isMany": true,
-          "type": "Comment"
+          "type": "Scenario"
         }
       ]
     },
     {
-      "name": "Comment",
-      "superClass": [
-        "Element"
-      ],
+      "name": "Scenario",
       "properties": [
-        {
-          "name": "author",
-          "isAttr": true,
-          "type": "String"
-        },
         {
           "name": "text",
           "isBody": true,
@@ -48,6 +30,6 @@
       ]
     }
   ],
-  "emumerations": [],
+  "enumerations": [],
   "associations": []
 }

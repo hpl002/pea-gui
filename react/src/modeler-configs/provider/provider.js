@@ -4,7 +4,7 @@ import PropertiesActivator from "bpmn-js-properties-panel/lib/PropertiesActivato
 import generalGroup from "./groups/general"
 import scenarioGroup from "./groups/scenario"
 
-export default function MagicPropertiesProvider(
+export default function PropertiesProvider(
   eventBus,
   bpmnFactory,
   canvas,
@@ -50,6 +50,17 @@ export default function MagicPropertiesProvider(
       }),
     };
 
+    /*
+      Scenario tab
+       - attributes
+       - parameters
+    */
+
+    /*
+      elements tab
+       - element parameters
+    */
+
 
 
 
@@ -59,4 +70,4 @@ export default function MagicPropertiesProvider(
   };
 }
 
-inherits(MagicPropertiesProvider, PropertiesActivator);
+inherits(PropertiesProvider, PropertiesActivator);

@@ -1,0 +1,30 @@
+{
+  "name": "QualityAssurance",
+  "uri": "http://some-company/schema/bpmn/qa",
+  "prefix": "qa",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "types": [
+    {
+      "name": "Comment",
+      "superClass": [
+        "Element"
+      ],
+      "properties": [
+        {
+          "name": "author",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "text",
+          "isBody": true,
+          "type": "String"
+        }
+      ]
+    }
+  ],
+  "emumerations": [],
+  "associations": []
+}

@@ -3,6 +3,7 @@ import PropertiesActivator from "bpmn-js-properties-panel/lib/PropertiesActivato
 
 import generalGroup from "./groups/general"
 import scenarioGroup from "./groups/scenario"
+import scenarioParameters from "./groups/scenarioParameters"
 
 export default function PropertiesProvider(
   eventBus,
@@ -13,17 +14,11 @@ export default function PropertiesProvider(
   moddle
 ) {
 
-
-  /* here i need to somehow  get moddle*/
-
   PropertiesActivator.call(this, eventBus);
 
   this.getTabs = function (element) {
 
     /*
-    
-    
-    
     var generalTab = {
       id: "generalTab",
       label: "General",
@@ -40,33 +35,15 @@ export default function PropertiesProvider(
     var scenarioTab = {
       id: "scenarioTab",
       label: "Scenario",
-      groups: scenarioGroup({
-        element,
-        bpmnFactory,
-        canvas,
-        elementRegistry,
-        translate,
-        moddle
-      }),
+      groups: scenarioGroup({ element, bpmnFactory, canvas, elementRegistry, translate, moddle })
     };
 
-    /*
-      Scenario tab
-       - attributes
-       - parameters
-    */
-
-    /*
-      elements tab
-       - element parameters
-    */
-
-
-
-
-
-
-    return [scenarioTab];
+    var scenarioParametersTab = {
+      id: "scenarioParametersTab",
+      label: "Scenario Parameters",
+      groups: scenarioParameters({ element, bpmnFactory, canvas, elementRegistry, translate, moddle })
+    };
+    return [scenarioTab, scenarioParametersTab];
   };
 }
 

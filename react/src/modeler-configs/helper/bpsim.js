@@ -25,7 +25,7 @@ scenarioHelper.get = (element) => {
     }
     else {
         const bpsim = extensionElements[0]
-        const scenarios = bpsim.$children;
+        const scenarios = bpsim.Scenario;
         if (scenarios.length === 1 || !currentId) {
             currentId = scenarios[0].id
             return scenarios[0]

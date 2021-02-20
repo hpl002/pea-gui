@@ -47,7 +47,7 @@ const newModeler = () => {
       },
       additionalModules: [propertiesPanelModule, provider],
       moddleExtensions: {
-        qa: qa
+        bpsim: bpsim
       }
     });
     return bpmnModeler

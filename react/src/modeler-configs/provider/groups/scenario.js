@@ -1,18 +1,24 @@
-import factory, { button } from "../props/scenario-props/attribute-factory"
+import factory from "../props/scenario-props/attribute-factory"
+import scenarioHelper from "../../../modeler-configs/helper/bpsim"
 
 
 
-export default function createGroups({ element, bpmnFactory, translate }) {
+export default function createGroups({ element, bpmnFactory, translate, commandStack }) {
   var scenarioGroup = {
     id: "scenario",
     label: "Scenario",
     entries: [],
   };
-  // TODO: button initializing a new scenario on some model that does not have any bpsim data
-  //button(scenarioGroup, element, bpmnFactory, translate);
 
-  // TODO: dropdown for selecting the current scenarios. A single document can hold many scenarios. 
-  // TODO: button for deleting some scenario and all related tags from file
+  // check if scenario exists, if not then create a new one
+  /* const currentScenario = scenarioHelper.getScenario(element)
+  if (currentScenario) {
+    console.log("found scenario")
+  }
+  else {
+    console.log("could not find scenario")
+    scenarioHelper.createScenario({ element, bpmnFactory, commandStack })
+  } */
 
 
   factory(scenarioGroup, element, bpmnFactory, translate, "id");

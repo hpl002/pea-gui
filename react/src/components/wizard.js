@@ -6,11 +6,12 @@ import transitions from "../scss/transitions.module.scss";
 import First from "./pages/First";
 import Modeler from "./pages/Modeler";
 import Miner from "./pages/Miner";
+import ScenarioSelecter from "./pages/ScenarioSelecter";
 
 /**
  * A basic demonstration of how to use the step wizard
  */
-const Wizard = (props) => {   
+const Wizard = (props) => {
   const [state, updateState] = useState({
     form: {},
     transitions: {
@@ -58,7 +59,8 @@ const Wizard = (props) => {
         state={props.state}
       />
       <Miner styles={{ height: "96vh" }} />
-      <Modeler state={props.state} currentStep={props.currentStep}/>
+      <ScenarioSelecter styles={{ height: "96vh" }} state={props.state} currentStep={props.currentStep} />
+      <Modeler state={props.state} currentStep={props.currentStep} />
     </StepWizard>
   );
 };

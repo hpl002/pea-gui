@@ -3,16 +3,8 @@ import PropertiesActivator from "bpmn-js-properties-panel/lib/PropertiesActivato
 
 import generalGroup from "./groups/general"
 import scenarioGroup from "./groups/scenario"
-import scenarioParameters from "./groups/scenarioParameters"
 
-export default function PropertiesProvider(
-  eventBus,
-  bpmnFactory,
-  canvas,
-  elementRegistry,
-  translate,
-  moddle
-) {
+export default function PropertiesProvider(eventBus, bpmnFactory, canvas, elementRegistry, translate, moddle, commandStack) {
 
   PropertiesActivator.call(this, eventBus);
 
@@ -35,15 +27,11 @@ export default function PropertiesProvider(
     var scenarioTab = {
       id: "scenarioTab",
       label: "Scenario",
-      groups: scenarioGroup({ element, bpmnFactory, canvas, elementRegistry, translate, moddle })
+      groups: scenarioGroup({ element, bpmnFactory, canvas, elementRegistry, translate })
     };
 
-    var scenarioParametersTab = {
-      id: "scenarioParametersTab",
-      label: "Scenario Parameters",
-      groups: scenarioParameters({ element, bpmnFactory, canvas, elementRegistry, translate, moddle })
-    };
-    return [scenarioTab, scenarioParametersTab];
+
+    return [scenarioTab];
   };
 }
 

@@ -1,4 +1,8 @@
-import lodash from "lodash"
+import extHelper from "bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper";
+import cmdHelper from "bpmn-js-properties-panel/lib/helper/CmdHelper";
+import elementHelper from "bpmn-js-properties-panel/lib/helper/ElementHelper";
+import { getBusinessObject } from 'bpmn-js/lib/util/ModelUtil';
+import UpdateBusinessObjectHandler from "bpmn-js-properties-panel/lib/cmd/UpdateBusinessObjectHandler";
 
 /**
  * add support for getter
@@ -18,7 +22,7 @@ var currentId = undefined;
  * @param  {} element
  * return id of current scenario or nothing
  */
-scenarioHelper.get = (element) => {
+scenarioHelper.getScenario = (element) => {
     const extensionElements = element?.businessObject?.extensionElements?.values
     if (!extensionElements) {
         return undefined
@@ -38,6 +42,39 @@ scenarioHelper.get = (element) => {
         }
     }
 }
+/**
+ * @param  {} element
+ * @param  {} attributes object describing attributes to assign on this new element
+ */
+scenarioHelper.createScenario = ({ element, attributes = { name: "newScenario1" }, bpmnFactory, commandStack }) => {
+    console.log("creating new scenario")
 
+    // <bpmn2:extensionElements></bpmn2:extensionElements>
+
+
+    //get the root process element and try to add a new attributes
+
+    const businessObject = getBusinessObject(element)
+
+
+    //creating a new businessobject
+
+
+
+
+    /*
+       const extensions = elementHelper.createElement("bpmn:ExtensionElements", { values: [] }, businessObject, bpmnFactory);
+       const root = elementHelper.createElement("bpsim:BPSimData", {}, extensions, bpmnFactory)
+       const scenario = elementHelper.createElement("bpsim:Scenario", attributes, root, bpmnFactory)
+       elementHelper.createElement("bpsim:ScenarioParameters", {}, scenario, bpmnFactory)
+       elementHelper.createElement("bpsim:ElementParameters", {}, scenario, bpmnFactory)
+   
+       command.push(
+           cmdHelper.updateProperties(element, {
+               extensionElements: extensions,
+           })
+       );
+   */
+}
 
 export default scenarioHelper;

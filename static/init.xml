@@ -4,7 +4,12 @@
   <bpmn2:process id="Process_1">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
-        <bpsim:Scenario id="my first scenario"></bpsim:Scenario>
+        <bpsim:Scenario id="my first scenario">
+          <bpsim:ScenarioParameters></bpsim:ScenarioParameters>
+        </bpsim:Scenario>
+        <bpsim:Scenario id="my second scenario">
+          <bpsim:ScenarioParameters></bpsim:ScenarioParameters>
+        </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
     <bpmn2:task id="Task_1" name="Examine Situation">

@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Styled from "styled-components";
 
+
+
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
@@ -11,10 +13,11 @@ import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 import "bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css";
 
 import propertiesPanelModule from "bpmn-js-properties-panel";
-import provider from "../modeler-configs/provider"
 
-import qa from '../modeler-configs/descriptors/qa.json';
-import bpsim from '../modeler-configs/descriptors/bpsim.json';
+import bpsimPropertiesPanel from "../modeler-configs/provider"
+import bpsimDescriptor from '../modeler-configs/descriptors/bpsim.json';
+
+
 
 const Component = (props) => {
   if (props.display) {
@@ -45,14 +48,14 @@ const newModeler = () => {
       propertiesPanel: {
         parent: "#properties",
       },
-      additionalModules: [propertiesPanelModule, provider],
+      additionalModules: [propertiesPanelModule, bpsimPropertiesPanel],
       moddleExtensions: {
-        bpsim: bpsim
+        bpsim: bpsimDescriptor
       }
     });
     return bpmnModeler
   } catch (error) {
-    console.error("could not create a new modeder", error)
+    console.error("could not create a new modeler", error)
   }
 
 };
@@ -75,9 +78,7 @@ const updateModeler = (bpmnModeler, model) => {
 
 
 function App(props) {
-  const {
-    state: { model, handleChange },
-  } = props;
+  const { state: { model, handleChange }, } = props;
   const [displayModeler, setDisplayModeler] = useState(true);
 
   const saveModelToState = async (callback) => {

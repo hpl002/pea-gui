@@ -2,6 +2,7 @@ import Stats from "../../helper";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "../../scss/pages.module.scss";
+import convert from "xml-js"
 
 //"https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/master/colors/resources/pizza-collaboration.bpmn"
 
@@ -18,18 +19,20 @@ const First = (props) => {
     var config = {
       method: 'get',
       url: '/api/init',
-      headers: { }
-    };    
+      headers: {}
+    };
     axios(config)
-    .then(function (response) {       
-      handleChange(response.data)
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-     
-     
-  },[]);
+      .then(function ({ data }) {
+        var xmlAsJson = convert.xml2json(data, { compact: true, spaces: 4 });
+        xmlAsJson = JSON.parse(xmlAsJson)
+        handleChange(xmlAsJson)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
+  }, []);
 
 
 

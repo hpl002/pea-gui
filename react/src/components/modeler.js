@@ -1,4 +1,6 @@
+
 /* eslint-disable react/prop-types */
+import convert from "xml-js"
 import React, { useEffect, useState } from "react";
 import Styled from "styled-components";
 
@@ -20,6 +22,11 @@ import bpsimDescriptor from '../modeler-configs/descriptors/bpsim.json';
 
 
 const Component = (props) => {
+  if (props.code) {
+    var options = { compact: true, ignoreComment: true, spaces: 4 };
+    var result = convert.json2xml(props.code, options);
+  }
+
   if (props.display) {
     return (
       <SyntaxHighlighter
@@ -31,7 +38,7 @@ const Component = (props) => {
         }}
         wrapLines={true}
       >
-        {props.code ? props.code : ""}
+        {result ? result : ""}
       </SyntaxHighlighter>
     );
   }
@@ -62,8 +69,12 @@ const newModeler = () => {
 
 
 const updateModeler = (bpmnModeler, model) => {
+
+  var options = { compact: true, ignoreComment: true, spaces: 4 };
+  var result = convert.json2xml(model, options);
+
   bpmnModeler
-    .importXML(model)
+    .importXML(result)
     .then(({ warnings }) => {
       if (warnings.length) {
         console.log("Warnings", warnings);
@@ -86,7 +97,9 @@ function App(props) {
       try {
         const result = await vbpmnModeler.saveXML({ format: true });
         const { xml } = result;
-        handleChange(xml);
+        var xmlAsJson = convert.xml2json(xml, { compact: true, spaces: 4 });
+        xmlAsJson = JSON.parse(xmlAsJson)
+        handleChange(xmlAsJson);
         callback();
       } catch (err) {
         console.log(err);

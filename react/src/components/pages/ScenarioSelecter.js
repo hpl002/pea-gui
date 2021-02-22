@@ -1,4 +1,5 @@
 import convert from "xml-js"
+import { findPathDeep } from 'deepdash-es/standalone';
 import lodash from "lodash"
 import React, { useEffect, useState } from "react";
 import Styled from "styled-components";
@@ -17,37 +18,30 @@ const ScenarioSelecter = (props) => {
     }
   }, [model]);
 
-
-  useEffect(() => {
-    console.log("scenarios updated", scenarios.length)
-
-  }, [scenarios]);
-
-
-
-  /* returns closest and FIRST matching object */
-  const closestMatch = (obj, key) => {
-    var keysArr = Object.keys(obj)
-    const absoluteKey = keysArr.filter(x => x.includes(key))
-    if (!absoluteKey.length) return undefined
-    return obj[absoluteKey[0]]
-  }
-
   const getScenarios = () => {
-    const bpsim = getBpsimdata()
-    const scenarios = closestMatch(bpsim, "Scenario")
-    return scenarios
 
-  }
+    console.log("get scenarios")
+    const predicate = (element) => {
+      return (value, key, parentValue, context) => {
+        const pathArray = context._item.path
+        if (pathArray.includes(element)) {
+          return true
+        }
+      }
+    }
 
-  const getBpsimdata = () => {
-    var xmlAsJson = convert.xml2json(model, { compact: true, spaces: 4 });
-    xmlAsJson = JSON.parse(xmlAsJson)
-    const definitions = closestMatch(xmlAsJson, "definitions")
-    const process = closestMatch(definitions, "process")
-    const ext = closestMatch(process, "extensionElements")
-    const bpsim = closestMatch(ext, "BPSimData")
-    return bpsim
+    var pathArray = getPath(model, predicate("bpsim:Scenario"), {
+      checkCircular: false,
+      pathFormat: 'array'
+    })
+
+
+    const indexOfElement = pathArray.findIndex(x => x.includes("bpsim:Scenario"))
+    pathArray.length = indexOfElement + 1
+
+    pathArray = pathArray.join(".")
+
+    return lodash.get(model, pathArray, [])
   }
 
   const setActive = (event) => {
@@ -56,55 +50,37 @@ const ScenarioSelecter = (props) => {
   }
 
 
-  /* provide xml document as object and the key of the element that you are looking for */
-  /* will return the full path to first match. this can then be used in lodash for safe retrieval or spliced for use with chaining */
-  const getPath = (obj, element) => {
-
-
-    /*
-    
-    
-    */
-
+  const getPath = (obj, predicate, poptions) => {
+    var options = {
+      checkCircular: false,
+      pathFormat: 'string'
+    }
+    if (poptions) options = poptions
+    return findPathDeep(obj, predicate, options)
   }
 
 
-  const updateBpsim = (newObject) => {
-
-
-    /* 
-    should do a recursive search until it finds the bpsim element and then return the path to this element    
-    we then replace the value directly and convert back to string before storing on state
-    */
-
-    const options = { compact: false, spaces: 4 }
-    const modelAsJson = JSON.parse(convert.xml2json(model, options))
-
-
-
-  }
 
   const deleteScenario = (event) => {
-    /* drop the clicked elemetn from state.scenarios  */
+    const predicate = (value, key, parentValue, context) => {
+      const pathArray = context._item.path
+      if (pathArray.includes("bpsim:Scenario")) {
+        if (key === "id" && value === event.target.parentNode.id) return true
+      }
+    }
 
-    /*  get path to scenarios */
+    const scenarioPath = getPath(model, predicate).split(".")[0]
 
-    /*  drop the entire scenarios object and replace with that from state */
+    console.log(getScenarios().length)
 
-
-    /* const scenarioIdentifier = event?.target?.parentNode?.id
-
-    const bpsimdata = getBpsimdata()
-    const scenarios = bpsimdata?.[0]?.elements
-    const remainingScenarios = scenarios.filter(x => x.attributes.id !== scenarioIdentifier)
-    bpsimdata[0].elements = remainingScenarios
-    updateBpsim(bpsimdata) */
+    // https://github.com/kolodny/immutability-helper
+    // see the link above for more on immutable data
+    // currently the state is being updated even though i am no calling setstate directly
 
 
+    lodash.unset(model, scenarioPath, {})
 
-    const arrCopy = [...scenarios];
-    arrCopy.pop()
-    setScenarios(arrCopy)
+    //    handleChange(copy)
   }
 
 

@@ -100,7 +100,6 @@ function App(props) {
         var xmlAsJson = convert.xml2json(xml, { compact: true, spaces: 4 });
         xmlAsJson = JSON.parse(xmlAsJson)
         handleChange(xmlAsJson);
-        callback();
       } catch (err) {
         console.log(err);
       }
@@ -120,7 +119,7 @@ function App(props) {
 
   useEffect(async () => {
     if (!prevStep) prevStep = props.currentStep
-    if (prevStep === 3) {
+    if (prevStep === 4) {
       await saveModelToState();
       console.log("current step:", props.currentStep)
       console.log("previous step:", prevStep)

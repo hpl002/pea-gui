@@ -145,17 +145,17 @@
         {
           "name": "Start",
           "isMany": false,
-          "type": "GenericParameter"
+          "type": "Start"
         },
         {
           "name": "Duration",
           "isMany": false,
-          "type": "GenericParameter"
+          "type": "Duration"
         },
         {
           "name": "Warmup",
           "isMany": false,
-          "type": "GenericParameter"
+          "type": "Warmup"
         }
       ]
     },
@@ -183,7 +183,27 @@
       "properties": []
     },
     {
-      "name": "GenericParameter",
+      "name": "Start",
+      "properties": [
+        {
+          "name": "ParameterValue",
+          "isMany": false,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "Duration",
+      "properties": [
+        {
+          "name": "ParameterValue",
+          "isMany": false,
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "name": "Warmup",
       "properties": [
         {
           "name": "ParameterValue",

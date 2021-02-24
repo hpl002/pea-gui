@@ -19,7 +19,6 @@ factory.scenario = (group, element, bpmnFactory, translate, attribute, type = "t
     //get the attribute value
     var getValue = function () {
         return function (element) {
-            const scenario = scenarioHelper.getScenario(element)
             const response = {};
             response[attributeIdentifier] = scenario[attribute]
             return response;
@@ -29,7 +28,6 @@ factory.scenario = (group, element, bpmnFactory, translate, attribute, type = "t
     //setthe attribute value
     const setValue = function (businessObject) {
         return function (element, values) {
-            const scenario = scenarioHelper.getScenario(element)
             scenario[attribute] = values[attributeIdentifier]
             return cmdHelper.updateBusinessObject(element, getBusinessObject(element));
         };
@@ -49,19 +47,25 @@ factory.scenario = (group, element, bpmnFactory, translate, attribute, type = "t
     }
 }
 
-factory.scenarioParameters = (group, element, bpmnFactory, translate, attribute, type = "textField") => {
+factory.scenarioParameter = {}
+
+factory.scenarioParameter.attributes = (group, element, bpmnFactory, translate, attribute, type = "textField") => {
 
     // pass inn the process element and get back the current scenario set accoring to the scenario id
-    const scenario = scenarioHelper.getScenario(element)
+    const getParameters = () => {
+        const scenario = scenarioHelper.getScenario(element)
+        return scenario?.ScenarioParameters?.[0]
+    }
 
-    const attributeIdentifier = `scenario_${attribute}`
+    const parameters = getParameters()
+
+    const attributeIdentifier = `scenarioParameter_${attribute}`
 
     //get the attribute value
     var getValue = function () {
         return function (element) {
-            const scenario = scenarioHelper.getScenario(element)
             const response = {};
-            response[attributeIdentifier] = scenario[attribute]
+            response[attributeIdentifier] = parameters[attribute]
             return response;
         };
     };
@@ -69,14 +73,13 @@ factory.scenarioParameters = (group, element, bpmnFactory, translate, attribute,
     //setthe attribute value
     const setValue = function (businessObject) {
         return function (element, values) {
-            const scenario = scenarioHelper.getScenario(element)
-            scenario[attribute] = values[attributeIdentifier]
+            parameters[attribute] = values[attributeIdentifier]
             return cmdHelper.updateBusinessObject(element, getBusinessObject(element));
         };
     };
 
     //only show fields if if the currently selected element is the process element
-    if (element?.type == "bpmn:Process" && scenario) {
+    if (element?.type == "bpmn:Process" && parameters) {
         var elementDocuEntry = entryFactory[type](translate, {
             id: attributeIdentifier,
             label: translate(attribute),
@@ -85,6 +88,48 @@ factory.scenarioParameters = (group, element, bpmnFactory, translate, attribute,
 
         elementDocuEntry.set = setValue(getBusinessObject(element))
         elementDocuEntry.get = getValue(getBusinessObject(element));
+        group.entries.push(elementDocuEntry);
+    }
+}
+
+factory.scenarioParameter.elements = (group, element, bpmnFactory, translate, elementType, type = "textField") => {
+    // pass inn the process element and get back the current scenario set accoring to the scenario id
+    const getParameters = () => {
+        const scenario = scenarioHelper.getScenario(element)
+        return scenario?.ScenarioParameters?.[0]
+    }
+
+    const parameters = getParameters()
+
+    const attributeIdentifier = `scenarioParameterElement_${elementType}`
+
+    //get the element value
+    var getValue = function () {
+        return function (element) {
+            const response = {};
+            response[attributeIdentifier] = parameters[elementType]?.ParameterValue
+            return response;
+        };
+    };
+
+    // assumes that the element always exists
+    const setValue = function (businessObject) {
+        return function (element, values) {
+            parameters[elementType]["ParameterValue"] = values[attributeIdentifier]
+            return cmdHelper.updateBusinessObject(element, getBusinessObject(element));
+        };
+    };
+
+    //only show fields if if the currently selected element is the process element
+    if (element?.type == "bpmn:Process" && parameters) {
+        var elementDocuEntry = entryFactory[type](translate, {
+            id: attributeIdentifier,
+            label: translate(elementType),
+            modelProperty: attributeIdentifier
+        });
+
+        elementDocuEntry.get = getValue(getBusinessObject(element));
+        elementDocuEntry.set = setValue(getBusinessObject(element))
         group.entries.push(elementDocuEntry);
     }
 }

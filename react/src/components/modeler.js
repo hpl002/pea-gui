@@ -100,6 +100,7 @@ function App(props) {
         var xmlAsJson = convert.xml2json(xml, { compact: true, spaces: 4 });
         xmlAsJson = JSON.parse(xmlAsJson)
         handleChange(xmlAsJson);
+        if (callback) callback();
       } catch (err) {
         console.log(err);
       }

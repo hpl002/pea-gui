@@ -141,6 +141,21 @@
           "type": "String",
           "isAttr": true,
           "default": "XES"
+        },
+        {
+          "name": "Start",
+          "isMany": false,
+          "type": "GenericParameter"
+        },
+        {
+          "name": "Duration",
+          "isMany": false,
+          "type": "GenericParameter"
+        },
+        {
+          "name": "Warmup",
+          "isMany": false,
+          "type": "GenericParameter"
         }
       ]
     },
@@ -166,6 +181,16 @@
     {
       "name": "VendorExtension",
       "properties": []
+    },
+    {
+      "name": "GenericParameter",
+      "properties": [
+        {
+          "name": "ParameterValue",
+          "isMany": false,
+          "type": "String"
+        }
+      ]
     }
   ],
   "enumerations": [],

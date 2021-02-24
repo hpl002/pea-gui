@@ -5,10 +5,17 @@
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario id="my first scenario">
-          <bpsim:ScenarioParameters></bpsim:ScenarioParameters>
-        </bpsim:Scenario>
-        <bpsim:Scenario id="my second scenario">
-          <bpsim:ScenarioParameters></bpsim:ScenarioParameters>
+          <bpsim:ScenarioParameters replication="123" seed="12345" baseTimeUnit="ms" baseCurrencyUnit="USD">
+            <bpsim:Start>
+              <bpsim:ParameterValue />
+            </bpsim:Start>
+            <bpsim:Duration>
+              <bpsim:ParameterValue />
+            </bpsim:Duration>
+            <bpsim:Warmup>
+              <bpsim:ParameterValue />
+            </bpsim:Warmup>
+          </bpsim:ScenarioParameters>
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>

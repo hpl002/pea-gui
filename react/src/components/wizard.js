@@ -7,6 +7,8 @@ import First from "./pages/First";
 import Modeler from "./pages/Modeler";
 import Miner from "./pages/Miner";
 import ScenarioSelecter from "./pages/ScenarioSelecter";
+import ExecuteSimulation from "./pages/ExecuteSimulation";
+import LogAnalysis from "./pages/LogAnalysis";
 
 /**
  * A basic demonstration of how to use the step wizard
@@ -61,6 +63,8 @@ const Wizard = (props) => {
       <Miner styles={{ height: "96vh" }} />
       <ScenarioSelecter styles={{ height: "96vh" }} state={props.state} currentStep={props.currentStep} />
       <Modeler state={props.state} currentStep={props.currentStep} />
+      <ExecuteSimulation styles={{ height: "96vh" }} />
+      <LogAnalysis styles={{ height: "96vh" }} />
     </StepWizard>
   );
 };

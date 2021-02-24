@@ -42,39 +42,6 @@ scenarioHelper.getScenario = (element) => {
         }
     }
 }
-/**
- * @param  {} element
- * @param  {} attributes object describing attributes to assign on this new element
- */
-scenarioHelper.createScenario = ({ element, attributes = { name: "newScenario1" }, bpmnFactory, commandStack }) => {
-    console.log("creating new scenario")
 
-    // <bpmn2:extensionElements></bpmn2:extensionElements>
-
-
-    //get the root process element and try to add a new attributes
-
-    const businessObject = getBusinessObject(element)
-
-
-    //creating a new businessobject
-
-
-
-
-    /*
-       const extensions = elementHelper.createElement("bpmn:ExtensionElements", { values: [] }, businessObject, bpmnFactory);
-       const root = elementHelper.createElement("bpsim:BPSimData", {}, extensions, bpmnFactory)
-       const scenario = elementHelper.createElement("bpsim:Scenario", attributes, root, bpmnFactory)
-       elementHelper.createElement("bpsim:ScenarioParameters", {}, scenario, bpmnFactory)
-       elementHelper.createElement("bpsim:ElementParameters", {}, scenario, bpmnFactory)
-   
-       command.push(
-           cmdHelper.updateProperties(element, {
-               extensionElements: extensions,
-           })
-       );
-   */
-}
 
 export default scenarioHelper;

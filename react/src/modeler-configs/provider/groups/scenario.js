@@ -21,16 +21,16 @@ export default function createGroups({ element, bpmnFactory, translate, commandS
   } */
 
 
-  factory(scenarioGroup, element, bpmnFactory, translate, "id");
-  factory(scenarioGroup, element, bpmnFactory, translate, "name");
-  factory(scenarioGroup, element, bpmnFactory, translate, "description", "textBox");
-  factory(scenarioGroup, element, bpmnFactory, translate, "author");
-  //factory(scenarioGroup, element, bpmnFactory, translate, "vendor");
-  factory(scenarioGroup, element, bpmnFactory, translate, "version");
-  //factory(scenarioGroup, element, bpmnFactory, translate, "inherits");
-  //factory(scenarioGroup, element, bpmnFactory, translate, "result");
-  //factory(scenarioGroup, element, bpmnFactory, translate, "created");
-  //factory(scenarioGroup, element, bpmnFactory, translate, "modified");
+  factory.scenario(scenarioGroup, element, bpmnFactory, translate, "id");
+  factory.scenario(scenarioGroup, element, bpmnFactory, translate, "name");
+  factory.scenario(scenarioGroup, element, bpmnFactory, translate, "description", "textBox");
+  factory.scenario(scenarioGroup, element, bpmnFactory, translate, "author");
+  //factory.scenario(scenarioGroup, element, bpmnFactory, translate, "vendor");
+  factory.scenario(scenarioGroup, element, bpmnFactory, translate, "version");
+  //factory.scenario(scenarioGroup, element, bpmnFactory, translate, "inherits");
+  //factory.scenario(scenarioGroup, element, bpmnFactory, translate, "result");
+  //factory.scenario(scenarioGroup, element, bpmnFactory, translate, "created");
+  //factory.scenario(scenarioGroup, element, bpmnFactory, translate, "modified");
 
   return [scenarioGroup];
 }

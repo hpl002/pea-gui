@@ -16,6 +16,8 @@ import "bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css";
 
 import propertiesPanelModule from "bpmn-js-properties-panel";
 
+
+import bpsimInitializerProvider from "../modeler-configs/modules/initializer/index"
 import bpsimPropertiesPanel from "../modeler-configs/provider"
 import bpsimDescriptor from '../modeler-configs/descriptors/bpsim.json';
 
@@ -55,7 +57,7 @@ const newModeler = () => {
       propertiesPanel: {
         parent: "#properties",
       },
-      additionalModules: [propertiesPanelModule, bpsimPropertiesPanel],
+      additionalModules: [propertiesPanelModule, bpsimPropertiesPanel, bpsimInitializerProvider],
       moddleExtensions: {
         bpsim: bpsimDescriptor
       }

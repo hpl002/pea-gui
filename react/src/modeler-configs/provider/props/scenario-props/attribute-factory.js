@@ -123,7 +123,7 @@ factory.scenarioParameter.elements = ({ group, element, bpmnFactory, translate, 
     const setValue = function (businessObject) {
         return function (element, values) {
             parameters[elementType][0].parameterValue[0].text = values[identifier]
-            //return cmdHelper.updateBusinessObject(element, getBusinessObject(element));
+            return cmdHelper.updateBusinessObject(element, getBusinessObject(element));
         };
     };
 

@@ -201,7 +201,13 @@
     },
     {
       "name": "ParameterValue",
-      "properties": []
+      "properties": [
+        {
+          "name": "text",
+          "type": "String",
+          "isBody": true
+        }
+      ]
     }
   ],
   "enumerations": [],

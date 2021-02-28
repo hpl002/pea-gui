@@ -30,8 +30,8 @@ export default function createGroups({ element, bpmnFactory, translate, commandS
   - propertyparameters
   */
   factory.scenarioParameter.elements(parameters, element, bpmnFactory, translate, "Start");
-  factory.scenarioParameter.elements(parameters, element, bpmnFactory, translate, "Duration");
-  factory.scenarioParameter.elements(parameters, element, bpmnFactory, translate, "Warmup");
+  //factory.scenarioParameter.elements(parameters, element, bpmnFactory, translate, "Duration");
+  //factory.scenarioParameter.elements(parameters, element, bpmnFactory, translate, "Warmup");
 
   // 
 

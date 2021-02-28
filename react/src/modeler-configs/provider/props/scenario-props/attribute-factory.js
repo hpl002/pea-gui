@@ -54,7 +54,7 @@ factory.scenarioParameter.attributes = (group, element, bpmnFactory, translate, 
     // pass inn the process element and get back the current scenario set accoring to the scenario id
     const getParameters = () => {
         const scenario = scenarioHelper.getScenario(element)
-        return scenario?.ScenarioParameters?.[0]
+        return scenario?.scenarioParameters?.[0]
     }
 
     const parameters = getParameters()
@@ -92,7 +92,7 @@ factory.scenarioParameter.attributes = (group, element, bpmnFactory, translate, 
     }
 }
 
-factory.scenarioParameter.elements = (group, element, bpmnFactory, translate, elementType, type = "textField") => {
+/* factory.scenarioParameter.elements = (group, element, bpmnFactory, translate, elementType, type = "textField") => {
     // pass inn the process element and get back the current scenario set accoring to the scenario id
     const getParameters = () => {
         const scenario = scenarioHelper.getScenario(element)
@@ -132,6 +132,28 @@ factory.scenarioParameter.elements = (group, element, bpmnFactory, translate, el
         elementDocuEntry.set = setValue(getBusinessObject(element))
         group.entries.push(elementDocuEntry);
     }
+} */
+
+factory.scenarioParameter.elements = (group, element, bpmnFactory, translate, elementType, type = "textField") => {
+
+    var bo = getBusinessObject(element),
+        updates = [],
+        extensionElements = bo.get('extensionElements');
+
+    console.log("")
+
+    // check if scenario extensionElement exists, if not then create it
+
+    if (!extensionElements) {
+        extensionElements = elementHelper.createElement('bpmn:ExtensionElements', null, element, bpmnFactory);
+
+        updates.push(cmdHelper.updateBusinessObject(
+            element, bo, { extensionElements: extensionElements }
+        ));
+    }
+
+
+
 }
 
 export default factory

@@ -25,7 +25,7 @@ export default function PropertiesProvider(eventBus, bpmnFactory, canvas, elemen
     };
     */
 
-    var scenarioTab = {
+    var scenarioAttributes = {
       id: "scenarioTab",
       label: "Scenario attributes",
       groups: scenarioGroup({ element, bpmnFactory, canvas, elementRegistry, translate })
@@ -39,7 +39,7 @@ export default function PropertiesProvider(eventBus, bpmnFactory, canvas, elemen
 
 
 
-    return [scenarioTab, scenarioParameters];
+    return [scenarioAttributes, scenarioParameters];
   };
 }
 

@@ -4,7 +4,7 @@ const Miner = (props) => {
   return (
     <div>
       <h3 className="text-center">
-        Miner goes here
+        {props.text}
       </h3>
     </div>
   );

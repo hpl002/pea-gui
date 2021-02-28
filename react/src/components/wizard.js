@@ -61,7 +61,7 @@ const Wizard = (props) => {
         state={props.state}
       />
       <Miner styles={{ height: "96vh" }} />
-      <ScenarioSelecter styles={{ height: "96vh" }} state={props.state} currentStep={props.currentStep} />
+      <Miner styles={{ height: "96vh" }} text={"placecholder for scenario selector"} />
       <Modeler state={props.state} currentStep={props.currentStep} />
       <ExecuteSimulation styles={{ height: "96vh" }} />
       <LogAnalysis styles={{ height: "96vh" }} />

@@ -1,0 +1,32 @@
+{
+  "name": "bpsim-moddle",
+  "prefix": "bpsim",
+  "uri": "https://www.bpsim.org/schemas/2.0/",
+  "types": [
+    {
+      "name": "bpsimdata",
+      "superClass": [
+        "Element"
+      ],
+      "properties": [
+        {
+          "name": "scenario",
+          "isMany": true,
+          "type": "scenario"
+        }
+      ]
+    },
+    {
+      "name": "scenario",
+      "properties": [
+        {
+          "name": "id",
+          "type": "String",
+          "isAttr": true
+        }
+      ]
+    }
+  ],
+  "enumerations": [],
+  "associations": []
+}

@@ -2,9 +2,6 @@
   "name": "bpsim-moddle",
   "prefix": "bpsim",
   "uri": "https://www.bpsim.org/schemas/2.0/",
-  "xml": {
-    "tagAlias": "lowerCase"
-  },
   "types": [
     {
       "name": "BPSimData",
@@ -13,7 +10,7 @@
       ],
       "properties": [
         {
-          "name": "Scenario",
+          "name": "scenario",
           "isMany": true,
           "type": "Scenario"
         }
@@ -73,24 +70,14 @@
           "isAttr": true
         },
         {
-          "name": "ScenarioParameters",
+          "name": "scenarioParameters",
           "isMany": true,
           "type": "ScenarioParameters"
         },
         {
-          "name": "ElementParameters",
+          "name": "elementParameters",
           "isMany": true,
           "type": "ElementParameters"
-        },
-        {
-          "name": "Calendar",
-          "isMany": true,
-          "type": "Calendar"
-        },
-        {
-          "name": "VendorExtension",
-          "isMany": true,
-          "type": "VendorExtension"
         }
       ]
     },
@@ -143,18 +130,18 @@
           "default": "XES"
         },
         {
-          "name": "Start",
-          "isMany": false,
+          "name": "start",
+          "isMany": true,
           "type": "Start"
         },
         {
-          "name": "Duration",
-          "isMany": false,
+          "name": "duration",
+          "isMany": true,
           "type": "Duration"
         },
         {
-          "name": "Warmup",
-          "isMany": false,
+          "name": "warmup",
+          "isMany": true,
           "type": "Warmup"
         }
       ]
@@ -186,9 +173,9 @@
       "name": "Start",
       "properties": [
         {
-          "name": "ParameterValue",
-          "isMany": false,
-          "type": "String"
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
         }
       ]
     },
@@ -196,9 +183,9 @@
       "name": "Duration",
       "properties": [
         {
-          "name": "ParameterValue",
-          "isMany": false,
-          "type": "String"
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
         }
       ]
     },
@@ -206,11 +193,15 @@
       "name": "Warmup",
       "properties": [
         {
-          "name": "ParameterValue",
-          "isMany": false,
-          "type": "String"
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
         }
       ]
+    },
+    {
+      "name": "ParameterValue",
+      "properties": []
     }
   ],
   "enumerations": [],

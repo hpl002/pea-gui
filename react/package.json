@@ -22,6 +22,7 @@
     "react-step-wizard": "^5.3.5",
     "react-syntax-highlighter": "^15.4.3",
     "styled-components": "^5.2.1",
+    "uuid": "^8.3.2",
     "web-vitals": "^0.2.4",
     "xml-js": "^1.6.11",
     "xml2js": "^0.4.23"

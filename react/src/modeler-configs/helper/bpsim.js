@@ -29,7 +29,7 @@ scenarioHelper.getScenario = (element) => {
     }
     else {
         const bpsim = extensionElements[0]
-        const scenarios = bpsim.Scenario;
+        const scenarios = bpsim.scenario;
         if (scenarios.length === 1 || !currentId) {
             currentId = scenarios[0].id
             return scenarios[0]

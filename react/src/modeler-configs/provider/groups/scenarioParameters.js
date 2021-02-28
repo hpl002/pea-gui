@@ -17,10 +17,10 @@ export default function createGroups({ element, bpmnFactory, translate, commandS
   };
 
 
-  factory.scenarioParameter.attributes(attributes, element, bpmnFactory, translate, "replication");
-  factory.scenarioParameter.attributes(attributes, element, bpmnFactory, translate, "seed");
-  factory.scenarioParameter.attributes(attributes, element, bpmnFactory, translate, "baseTimeUnit");
-  factory.scenarioParameter.attributes(attributes, element, bpmnFactory, translate, "baseCurrencyUnit");
+  factory.scenarioParameter.attributes({ group: attributes, element, translate, attribute: "replication" });
+  factory.scenarioParameter.attributes({ group: attributes, element, translate, attribute: "seed" });
+  factory.scenarioParameter.attributes({ group: attributes, element, translate, attribute: "baseTimeUnit" });
+  factory.scenarioParameter.attributes({ group: attributes, element, translate, attribute: "baseCurrencyUnit" });
 
   // add support for scenarioParameters elements
   /*
@@ -29,11 +29,9 @@ export default function createGroups({ element, bpmnFactory, translate, commandS
   - warmup
   - propertyparameters
   */
-  factory.scenarioParameter.elements(parameters, element, bpmnFactory, translate, "Start");
-  //factory.scenarioParameter.elements(parameters, element, bpmnFactory, translate, "Duration");
-  //factory.scenarioParameter.elements(parameters, element, bpmnFactory, translate, "Warmup");
-
-  // 
+  factory.scenarioParameter.elements({ group: parameters, element, translate, elementType: "start" });
+  factory.scenarioParameter.elements({ group: parameters, element, translate, elementType: "duration" });
+  factory.scenarioParameter.elements({ group: parameters, element, translate, elementType: "warmup" });
 
   return [attributes, parameters];
 }

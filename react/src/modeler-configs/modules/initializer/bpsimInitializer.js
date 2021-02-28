@@ -38,19 +38,15 @@ export default function BpsimInitializer(eventBus, bpmnFactory, canvas, elementR
         // create extensionElement if it does not exist
         if (!extensionElements) {
 
-
-
-            const parameterValue = moddle.create("bpsim:ParameterValue")
-
             const scenarioParameters = moddle.create('bpsim:ScenarioParameters', {
                 start: [
-                    moddle.create('bpsim:Start', { parameterValue: [parameterValue] })
+                    moddle.create('bpsim:Start', { parameterValue: [moddle.create("bpsim:ParameterValue")] })
                 ],
                 duration: [
-                    moddle.create('bpsim:Duration', { parameterValue: [parameterValue] })
+                    moddle.create('bpsim:Duration', { parameterValue: [moddle.create("bpsim:ParameterValue")] })
                 ],
                 warmup: [
-                    moddle.create('bpsim:Warmup', { parameterValue: [parameterValue] })
+                    moddle.create('bpsim:Warmup', { parameterValue: [moddle.create("bpsim:ParameterValue")] })
                 ],
             });
 
@@ -101,7 +97,6 @@ export default function BpsimInitializer(eventBus, bpmnFactory, canvas, elementR
         return updates
     }
 
-    console.log(eventBus)
     let isImportDone = false
     let bo;
 
@@ -118,12 +113,10 @@ export default function BpsimInitializer(eventBus, bpmnFactory, canvas, elementR
                 elementStructure.forEach(element => {
                     const { cmd } = element
                     const { context } = element
-                    console.log(cmd, context)
                     commandStack.execute(cmd, context)
                 });
             }
         }
-        console.log(getBusinessObject(element))
     });
 
 

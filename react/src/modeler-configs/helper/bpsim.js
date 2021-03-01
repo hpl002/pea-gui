@@ -23,7 +23,10 @@ var currentId = undefined;
  * return id of current scenario or nothing
  */
 scenarioHelper.getScenario = (element) => {
-    const extensionElements = element?.businessObject?.extensionElements?.values
+    if (element.$type !== "bpmn:Process") {
+        throw new Error("cannot find scenario in non-process elememt")
+    }
+    const extensionElements = element?.extensionElements?.values
     if (!extensionElements) {
         return undefined
     }
@@ -41,6 +44,14 @@ scenarioHelper.getScenario = (element) => {
             return currentScenario[0]
         }
     }
+}
+
+scenarioHelper.getExtensinoElements = (element) => {
+    if (element.$type !== "bpmn:Process") {
+        throw new Error("cannot find scenario in non-process elememt")
+    }
+    return element?.extensionElements
+
 }
 
 

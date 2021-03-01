@@ -158,6 +158,11 @@
           "name": "elementRef",
           "type": "string",
           "isAttr": true
+        },
+        {
+          "name": "timeParameters",
+          "isMany": true,
+          "type": "TimeParameters"
         }
       ]
     },
@@ -201,6 +206,41 @@
     },
     {
       "name": "ParameterValue",
+      "properties": [
+        {
+          "name": "text",
+          "type": "String",
+          "isBody": true
+        }
+      ]
+    },
+    {
+      "name": "TimeParameters",
+      "properties": [
+        {
+          "name": "transferTime",
+          "isMany": true,
+          "type": "TransferTime"
+        }
+      ]
+    },
+    {
+      "name": "TransferTime",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "ResultRequest",
       "properties": [
         {
           "name": "text",

@@ -46,16 +46,16 @@ export default function PropertiesProvider(eventBus, bpmnFactory, canvas, elemen
 
       tabsArr.push(scenarioParameters)
     }
-    else {
+    else if (element.type === "bpmn:Task" || element.type === "bpmn:ExclusiveGateway") {
       var elementParameters = {
         id: "elementParameters",
         label: "Element Parameters",
-        groups: elementParametersGroup({ element, bpmnFactory, canvas, elementRegistry, translate })
+        groups: elementParametersGroup({ element, bpmnFactory, canvas, elementRegistry, translate, moddle })
       };
 
       tabsArr.push(elementParameters)
-
     }
+
     return tabsArr
   };
 }

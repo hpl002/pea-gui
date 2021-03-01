@@ -12,7 +12,7 @@ const factory = {}
 factory.scenario = (group, element, bpmnFactory, translate, attribute, type = "textField") => {
 
     // pass inn the process element and get back the current scenario set accoring to the scenario id
-    const scenario = scenarioHelper.getScenario(element)
+    const scenario = scenarioHelper.getScenario(getBusinessObject(element))
 
     const attributeIdentifier = `scenario_${attribute}`
 
@@ -34,7 +34,7 @@ factory.scenario = (group, element, bpmnFactory, translate, attribute, type = "t
     };
 
     //only show fields if if the currently selected element is the process element
-    if (element?.type == "bpmn:Process" && scenario) {
+    if (scenario) {
         var elementDocuEntry = entryFactory[type](translate, {
             id: attributeIdentifier,
             label: translate(attribute),
@@ -48,18 +48,21 @@ factory.scenario = (group, element, bpmnFactory, translate, attribute, type = "t
 }
 
 factory.scenarioParameter = {}
+factory.elementParameters = {}
 
 const getParameters = (element) => {
-    const scenario = scenarioHelper.getScenario(element)
+    const scenario = scenarioHelper.getScenario(getBusinessObject(element))
     return scenario?.scenarioParameters?.[0]
 }
 
+const getElementParameters = (element) => {
+    const parentProcess = element?.businessObject?.$parent
+    const scenario = scenarioHelper.getScenario(parentProcess)
+    return scenario?.elementParameters
+}
+
 factory.scenarioParameter.attributes = ({ group, element, bpmnFactory, translate, attribute, type = "textField" }) => {
-
-    // pass inn the process element and get back the current scenario set accoring to the scenario id
-
     const parameters = getParameters(element)
-
     const identifier = `scenarioParameter_${attribute}`
 
     //get the attribute value
@@ -127,30 +130,74 @@ factory.scenarioParameter.elements = ({ group, element, bpmnFactory, translate, 
         };
     };
 
+    var elementDocuEntry = entryFactory[type](translate, {
+        id: identifier,
+        label: translate(elementType),
+        modelProperty: identifier
+    });
 
-    // get the element businessObject
-
-    // check if it has the parameterValue element, if not then create this
-
-    //only show fields if if the currently selected element is the process element
-    if (element?.type == "bpmn:Process" && parameters) {
-        var elementDocuEntry = entryFactory[type](translate, {
-            id: identifier,
-            label: translate(elementType),
-            modelProperty: identifier
-        });
-
-        elementDocuEntry.set = setValue(getBusinessObject(element))
-        elementDocuEntry.get = getValue(getBusinessObject(element));
-        group.entries.push(elementDocuEntry);
-    }
+    elementDocuEntry.set = setValue(getBusinessObject(element))
+    elementDocuEntry.get = getValue(getBusinessObject(element));
+    group.entries.push(elementDocuEntry);
 }
 
 
 
+factory.elementParameters.attributes = ({ group, element, bpmnFactory, translate, attribute, type = "textField", moddle }) => {
+    const identifier = `elementParameters${attribute}`
+    const parameters = getElementParameters(element)
+
+    const currentParameter = parameters.filter(x => x.elementRef === element.id)
+
+    var getValue = function () {
+        return function (element) {
+            const response = {};
+            if (currentParameter?.[0]?.[attribute]) response[identifier] = currentParameter[0][attribute]
+            return response;
+        };
+    };
 
 
 
+
+    var elementDocuEntry = entryFactory[type](translate, {
+        id: identifier,
+        label: translate(attribute),
+        modelProperty: identifier
+    });
+
+    elementDocuEntry.get = getValue(getBusinessObject(element));
+    group.entries.push(elementDocuEntry);
+
+}
+
+factory.elementParameters.elements = ({ group, element, bpmnFactory, translate, type = "textField", moddle, parentElement, childElement }) => {
+    const identifier = `elementParameters${childElement}`
+    const parameters = getElementParameters(element)
+
+    const currentParameter = parameters.filter(x => x.elementRef === element.id)
+
+    var getValue = function () {
+        return function (element) {
+            const response = {};
+            if (currentParameter?.[0]?.[childElement]) response[identifier] = currentParameter[0][childElement]
+            return response;
+        };
+    };
+
+
+
+
+    var elementDocuEntry = entryFactory[type](translate, {
+        id: identifier,
+        label: translate(childElement),
+        modelProperty: identifier
+    });
+
+    elementDocuEntry.get = getValue(getBusinessObject(element));
+    group.entries.push(elementDocuEntry);
+
+}
 
 
 

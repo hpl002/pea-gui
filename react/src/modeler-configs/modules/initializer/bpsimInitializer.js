@@ -50,16 +50,12 @@ export default function BpsimInitializer(eventBus, bpmnFactory, canvas, elementR
                 ],
             });
 
-            const elementParameters = moddle.create('bpsim:ElementParameters');
-
             const scenario = moddle.create('bpsim:Scenario', {
                 id: uuidv4().split("-")[0],
                 scenarioParameters: [
                     scenarioParameters
                 ],
-                elementParameters: [
-                    elementParameters
-                ]
+
             })
 
 

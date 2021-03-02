@@ -168,6 +168,11 @@
           "name": "controlParameters",
           "isMany": true,
           "type": "ControlParameters"
+        },
+        {
+          "name": "resourceParameters",
+          "isMany": true,
+          "type": "ResourceParameters"
         }
       ]
     },
@@ -241,6 +246,31 @@
           "name": "triggerCount",
           "isMany": true,
           "type": "TriggerCount"
+        }
+      ]
+    },
+    {
+      "name": "ResourceParameters",
+      "properties": [
+        {
+          "name": "selection",
+          "isMany": true,
+          "type": "Selection"
+        },
+        {
+          "name": "availability",
+          "isMany": true,
+          "type": "Availability"
+        },
+        {
+          "name": "quantity",
+          "isMany": true,
+          "type": "Quantity"
+        },
+        {
+          "name": "role",
+          "isMany": true,
+          "type": "Role"
         }
       ]
     },
@@ -496,6 +526,66 @@
     },
     {
       "name": "TriggerCount",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "Selection",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "Availability",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "Quantity",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "Role",
       "properties": [
         {
           "name": "resultRequest",

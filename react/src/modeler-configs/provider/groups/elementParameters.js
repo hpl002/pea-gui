@@ -28,6 +28,13 @@ export default function createGroups({ element, bpmnFactory, translate, commandS
     };
 
 
+    var ResourceParameters = {
+      id: "ResourceParameters",
+      label: "ResourceParameters",
+      entries: [],
+    };
+
+
 
 
     factory.elementParameters.attributes({ group: attributes, element, translate, attribute: "elementRef", moddle });
@@ -47,7 +54,36 @@ export default function createGroups({ element, bpmnFactory, translate, commandS
     factory.elementParameters.elements({ group: ControlParameters, element, translate, parentElement: "controlParameters", childElement: "condition", moddle });
     factory.elementParameters.elements({ group: ControlParameters, element, translate, parentElement: "controlParameters", childElement: "interTriggerTime", moddle });
     factory.elementParameters.elements({ group: ControlParameters, element, translate, parentElement: "controlParameters", childElement: "triggerCount", moddle });
+
+    factory.elementParameters.elements({ group: ResourceParameters, element, translate, parentElement: "resourceParameters", childElement: "selection", moddle });
+    factory.elementParameters.elements({ group: ResourceParameters, element, translate, parentElement: "resourceParameters", childElement: "availability", moddle });
+    factory.elementParameters.elements({ group: ResourceParameters, element, translate, parentElement: "resourceParameters", childElement: "quantity", moddle });
+    factory.elementParameters.elements({ group: ResourceParameters, element, translate, parentElement: "resourceParameters", childElement: "role", moddle });
+
+
+    /*
+    
+          <ResourceParameters>
+        <Selection>
+          <ResultRequest>min</ResultRequest>
+          <ParameterValue validFor="???" instance="str1234" result="min" resultTimeStamp="2012-12-13T12:12:12" />
+        </Selection>
+        <Availability>
+          <ResultRequest>min</ResultRequest>
+          <ParameterValue validFor="???" instance="str1234" result="min" resultTimeStamp="2012-12-13T12:12:12" />
+        </Availability>
+        <Quantity>
+          <ResultRequest>min</ResultRequest>
+          <ParameterValue validFor="???" instance="str1234" result="min" resultTimeStamp="2012-12-13T12:12:12" />
+        </Quantity>
+        <Role>
+          <ResultRequest>min</ResultRequest>
+          <ParameterValue validFor="???" instance="str1234" result="min" resultTimeStamp="2012-12-13T12:12:12" />
+        </Role>
+      </ResourceParameters>
+    
+    */
     //TODO: add remaining fields and groups
-    return [attributes, TimeParameters, ControlParameters];
+    return [attributes, TimeParameters, ControlParameters, ResourceParameters];
   }
 }

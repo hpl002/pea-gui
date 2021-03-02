@@ -221,11 +221,191 @@
           "name": "transferTime",
           "isMany": true,
           "type": "TransferTime"
+        },
+        {
+          "name": "queueTime",
+          "isMany": true,
+          "type": "QueueTime"
+        },
+        {
+          "name": "waitTime",
+          "isMany": true,
+          "type": "WaitTime"
+        },
+        {
+          "name": "setUpTime",
+          "isMany": true,
+          "type": "SetUpTime"
+        },
+        {
+          "name": "processingTime",
+          "isMany": true,
+          "type": "ProcessingTime"
+        },
+        {
+          "name": "validationTime",
+          "isMany": true,
+          "type": "ValidationTime"
+        },
+        {
+          "name": "reworkTime",
+          "isMany": true,
+          "type": "ReworkTime"
+        },
+        {
+          "name": "lagTime",
+          "isMany": true,
+          "type": "LagTime"
+        },
+        {
+          "name": "duration",
+          "isMany": true,
+          "type": "Duration"
+        },
+        {
+          "name": "elapsedTime",
+          "isMany": true,
+          "type": "ElapsedTime"
         }
       ]
     },
     {
       "name": "TransferTime",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "QueueTime",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "WaitTime",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "SetUpTime",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "ProcessingTime",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "ValidationTime",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "ReworkTime",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "LagTime",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "Duration",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "ElapsedTime",
       "properties": [
         {
           "name": "resultRequest",

@@ -282,8 +282,23 @@ factory.elementParameters.elements = ({ group, element, bpmnFactory, translate, 
                 if (elementIndex > -1) {
                     console.log("found existing entry for element with id", element.id)
                     const newElement = moddle.create('bpsim:ElementParameters', options)
+                    const newElementDirect = moddle.create(`bpsim:${capitalize(childElement)}`, {
+                        resultRequest: [
+                            moddle.create('bpsim:ResultRequest')
+                        ],
+                        parameterValue: [
+                            moddle.create('bpsim:ParameterValue', { text: values?.[identifier] ? values?.[identifier] : "" })
+                        ],
+                    })
                     const existingElement = scenario.elementParameters[elementIndex]
-                    scenario.elementParameters[elementIndex] = lodash.merge(existingElement, newElement)
+
+                    //instead og merging the object we can add the new moddle object as an attribute directly 
+                    if (!values?.[identifier]) {
+                        delete scenario.elementParameters[elementIndex][parentElement][0][childElement]
+                    }
+                    else {
+                        scenario.elementParameters[elementIndex][parentElement][0][childElement] = [newElementDirect]
+                    }
                 }
                 else {
                     console.log("array exists, but there are no pre-existing elements with matching id")

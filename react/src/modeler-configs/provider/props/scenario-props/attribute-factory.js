@@ -268,7 +268,6 @@ factory.elementParameters.elements = ({ group, element, bpmnFactory, translate, 
             options.elementRef = element.id
             options[parentElement] = [moddle.create(`bpsim:${capitalize(parentElement)}`, childOptions)]
 
-            // TODO: see if there are any existing entries wit the same id, if so then merge these together
 
             const scenario = extensionElements.values[0].scenario[0]
             if (!scenario?.elementParameters) {
@@ -294,7 +293,24 @@ factory.elementParameters.elements = ({ group, element, bpmnFactory, translate, 
 
                     //instead og merging the object we can add the new moddle object as an attribute directly 
                     if (!values?.[identifier]) {
+                        // delete the specific obj attribute
                         delete scenario.elementParameters[elementIndex][parentElement][0][childElement]
+                        var keys = Object.keys(scenario.elementParameters[elementIndex][parentElement][0])
+                        keys = keys.filter(x => !x.includes("$"))
+                        if (keys.length === 0) {
+                            console.log(`${parentElement} has no more attributes. Deleting obj`)
+                            // delete the parentElement if it has no entries
+                            delete scenario.elementParameters[elementIndex][parentElement]
+                        }
+                        keys = Object.keys(scenario.elementParameters[elementIndex])
+                        // delete the 
+                        keys = keys.filter(x => !x.includes("$") && !x.includes("elementRef"))
+                        if (keys.length === 0) delete scenario.elementParameters[elementIndex]
+                        // delete the entire elementParameters element if it has no children
+                        if (scenario.elementParameters.length === 0) delete scenario.elementParameters
+
+
+
                         // TODO: if the parentElement is empty then delete this also
 
                     }

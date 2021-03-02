@@ -34,6 +34,25 @@ export default function createGroups({ element, bpmnFactory, translate, commandS
       entries: [],
     };
 
+    var PriorityParameters = {
+      id: "PriorityParameters",
+      label: "PriorityParameters",
+      entries: [],
+    };
+
+    var CostParameters = {
+      id: "CostParameters",
+      label: "CostParameters",
+      entries: [],
+    };
+
+    var PropertyParameters = {
+      id: "CostParaPropertyParametersmeters",
+      label: "PropertyParameters",
+      entries: [],
+    };
+
+
 
 
 
@@ -60,30 +79,18 @@ export default function createGroups({ element, bpmnFactory, translate, commandS
     factory.elementParameters.elements({ group: ResourceParameters, element, translate, parentElement: "resourceParameters", childElement: "quantity", moddle });
     factory.elementParameters.elements({ group: ResourceParameters, element, translate, parentElement: "resourceParameters", childElement: "role", moddle });
 
+    factory.elementParameters.elements({ group: PriorityParameters, element, translate, parentElement: "priorityParameters", childElement: "interruptible", moddle });
+    factory.elementParameters.elements({ group: PriorityParameters, element, translate, parentElement: "priorityParameters", childElement: "priority", moddle });
 
-    /*
-    
-          <ResourceParameters>
-        <Selection>
-          <ResultRequest>min</ResultRequest>
-          <ParameterValue validFor="???" instance="str1234" result="min" resultTimeStamp="2012-12-13T12:12:12" />
-        </Selection>
-        <Availability>
-          <ResultRequest>min</ResultRequest>
-          <ParameterValue validFor="???" instance="str1234" result="min" resultTimeStamp="2012-12-13T12:12:12" />
-        </Availability>
-        <Quantity>
-          <ResultRequest>min</ResultRequest>
-          <ParameterValue validFor="???" instance="str1234" result="min" resultTimeStamp="2012-12-13T12:12:12" />
-        </Quantity>
-        <Role>
-          <ResultRequest>min</ResultRequest>
-          <ParameterValue validFor="???" instance="str1234" result="min" resultTimeStamp="2012-12-13T12:12:12" />
-        </Role>
-      </ResourceParameters>
-    
-    */
+    factory.elementParameters.elements({ group: CostParameters, element, translate, parentElement: "costParameters", childElement: "fixedCost", moddle });
+    factory.elementParameters.elements({ group: CostParameters, element, translate, parentElement: "costParameters", childElement: "unitCost", moddle });
+
+    //factory.elementParameters.elements({ group: PropertyParameters, element, translate, parentElement: "propertyParameters", childElement: "property", moddle });
+    //factory.elementParameters.elements({ group: PropertyParameters, element, translate, parentElement: "propertyParameters", childElement: "queueLength", moddle });
+
+
+
     //TODO: add remaining fields and groups
-    return [attributes, TimeParameters, ControlParameters, ResourceParameters];
+    return [attributes, TimeParameters, ControlParameters, ResourceParameters, PriorityParameters, CostParameters];
   }
 }

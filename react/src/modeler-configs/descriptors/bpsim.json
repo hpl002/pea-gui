@@ -173,6 +173,16 @@
           "name": "resourceParameters",
           "isMany": true,
           "type": "ResourceParameters"
+        },
+        {
+          "name": "priorityParameters",
+          "isMany": true,
+          "type": "PriorityParameters"
+        },
+        {
+          "name": "costParameters",
+          "isMany": true,
+          "type": "CostParameters"
         }
       ]
     },
@@ -271,6 +281,36 @@
           "name": "role",
           "isMany": true,
           "type": "Role"
+        }
+      ]
+    },
+    {
+      "name": "PriorityParameters",
+      "properties": [
+        {
+          "name": "interruptible",
+          "isMany": true,
+          "type": "Interruptible"
+        },
+        {
+          "name": "priority",
+          "isMany": true,
+          "type": "Priority"
+        }
+      ]
+    },
+    {
+      "name": "CostParameters",
+      "properties": [
+        {
+          "name": "fixedCost",
+          "isMany": true,
+          "type": "FixedCost"
+        },
+        {
+          "name": "unitCost",
+          "isMany": true,
+          "type": "UnitCost"
         }
       ]
     },
@@ -586,6 +626,66 @@
     },
     {
       "name": "Role",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "Interruptible",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "Priority",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "FixedCost",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "UnitCost",
       "properties": [
         {
           "name": "resultRequest",

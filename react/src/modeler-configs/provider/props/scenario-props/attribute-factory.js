@@ -281,23 +281,30 @@ factory.elementParameters.elements = ({ group, element, bpmnFactory, translate, 
                 const elementIndex = scenario.elementParameters.findIndex(e => e.elementRef === element.id)
                 if (elementIndex > -1) {
                     console.log("found existing entry for element with id", element.id)
-                    const newElement = moddle.create('bpsim:ElementParameters', options)
-                    const newElementDirect = moddle.create(`bpsim:${capitalize(childElement)}`, {
+                    const newParentElement = [moddle.create(`bpsim:${capitalize(parentElement)}`, childOptions)]
+                    const newChildElement = [moddle.create(`bpsim:${capitalize(childElement)}`, {
                         resultRequest: [
                             moddle.create('bpsim:ResultRequest')
                         ],
                         parameterValue: [
                             moddle.create('bpsim:ParameterValue', { text: values?.[identifier] ? values?.[identifier] : "" })
                         ],
-                    })
+                    })]
                     const existingElement = scenario.elementParameters[elementIndex]
 
                     //instead og merging the object we can add the new moddle object as an attribute directly 
                     if (!values?.[identifier]) {
                         delete scenario.elementParameters[elementIndex][parentElement][0][childElement]
+                        // TODO: if the parentElement is empty then delete this also
+
                     }
                     else {
-                        scenario.elementParameters[elementIndex][parentElement][0][childElement] = [newElementDirect]
+                        if (scenario.elementParameters[elementIndex][parentElement]) {
+                            scenario.elementParameters[elementIndex][parentElement][0][childElement] = newChildElement
+                        }
+                        else {
+                            scenario.elementParameters[elementIndex][parentElement] = newParentElement
+                        }
                     }
                 }
                 else {

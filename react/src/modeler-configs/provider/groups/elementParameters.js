@@ -20,6 +20,16 @@ export default function createGroups({ element, bpmnFactory, translate, commandS
       entries: [],
     };
 
+
+    var ControlParameters = {
+      id: "ControlParameters",
+      label: "ControlParameters",
+      entries: [],
+    };
+
+
+
+
     factory.elementParameters.attributes({ group: attributes, element, translate, attribute: "elementRef", moddle });
     factory.elementParameters.elements({ group: TimeParameters, element, translate, parentElement: "timeParameters", childElement: "transferTime", moddle });
     factory.elementParameters.elements({ group: TimeParameters, element, translate, parentElement: "timeParameters", childElement: "queueTime", moddle });
@@ -31,7 +41,13 @@ export default function createGroups({ element, bpmnFactory, translate, commandS
     factory.elementParameters.elements({ group: TimeParameters, element, translate, parentElement: "timeParameters", childElement: "lagTime", moddle });
     factory.elementParameters.elements({ group: TimeParameters, element, translate, parentElement: "timeParameters", childElement: "duration", moddle });
     factory.elementParameters.elements({ group: TimeParameters, element, translate, parentElement: "timeParameters", childElement: "elapsedTime", moddle });
+
+
+    factory.elementParameters.elements({ group: ControlParameters, element, translate, parentElement: "controlParameters", childElement: "probability", moddle });
+    factory.elementParameters.elements({ group: ControlParameters, element, translate, parentElement: "controlParameters", childElement: "condition", moddle });
+    factory.elementParameters.elements({ group: ControlParameters, element, translate, parentElement: "controlParameters", childElement: "interTriggerTime", moddle });
+    factory.elementParameters.elements({ group: ControlParameters, element, translate, parentElement: "controlParameters", childElement: "triggerCount", moddle });
     //TODO: add remaining fields and groups
-    return [attributes, TimeParameters];
+    return [attributes, TimeParameters, ControlParameters];
   }
 }

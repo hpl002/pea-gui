@@ -163,6 +163,11 @@
           "name": "timeParameters",
           "isMany": true,
           "type": "TimeParameters"
+        },
+        {
+          "name": "controlParameters",
+          "isMany": true,
+          "type": "ControlParameters"
         }
       ]
     },
@@ -211,6 +216,31 @@
           "name": "text",
           "type": "String",
           "isBody": true
+        }
+      ]
+    },
+    {
+      "name": "ControlParameters",
+      "properties": [
+        {
+          "name": "probability",
+          "isMany": true,
+          "type": "Probability"
+        },
+        {
+          "name": "condition",
+          "isMany": true,
+          "type": "Condition"
+        },
+        {
+          "name": "interTriggerTime",
+          "isMany": true,
+          "type": "InterTriggerTime"
+        },
+        {
+          "name": "triggerCount",
+          "isMany": true,
+          "type": "TriggerCount"
         }
       ]
     },
@@ -406,6 +436,66 @@
     },
     {
       "name": "ElapsedTime",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "Probability",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "Condition",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "InterTriggerTime",
+      "properties": [
+        {
+          "name": "resultRequest",
+          "isMany": true,
+          "type": "ResultRequest"
+        },
+        {
+          "name": "parameterValue",
+          "isMany": true,
+          "type": "ParameterValue"
+        }
+      ]
+    },
+    {
+      "name": "TriggerCount",
       "properties": [
         {
           "name": "resultRequest",
